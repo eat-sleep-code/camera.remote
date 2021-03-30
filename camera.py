@@ -309,7 +309,7 @@ def createControls():
 	global buttonDictionary
 	
 	running = True
-	StreamingServer.startStream(running, statusDictionary, buttonDictionary)
+	Server.startStream(running, statusDictionary, buttonDictionary)
 	
 # -------------------------------------------------------------------------------
 def darkMode():
