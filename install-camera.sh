@@ -46,7 +46,7 @@ echo ''
 echo -e '\033[93mSetting up alias... \033[0m'
 sudo touch ~/.bash_aliases
 sudo sed -i '/\b\(function camera.remote\)\b/d' ~/.bash_aliases
-sudo sed -i '$ a function camera.remote { sudo python3 ~/camera.remote/server.py "$@"; }' ~/.bash_aliases
+sudo sed -i '$ a function camera.remote { sudo python3 ~/camera.remote/camera.py "$@"; }' ~/.bash_aliases
 echo -e 'Please ensure that your camera and I2C interfaces are enabled in raspi-config before proceeding.'
 
 echo ''

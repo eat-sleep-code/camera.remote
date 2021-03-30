@@ -17,7 +17,7 @@ Combining this program with a Raspberry Pi HQ camera, a Raspberry Pi Zero WH, an
 Installation of the program, any software prerequisites, as well as DNG support can be completed with the following two-line install script.
 
 ```
-wget -q https://raw.githubusercontent.com/eat-sleep-code/camera.remote/master/install-camera.sh -O ~/install-camera.sh
+wget -q https://raw.githubusercontent.com/eat-sleep-code/camera.remote/main/install-camera.sh -O ~/install-camera.sh
 sudo chmod +x ~/install-camera.sh && ~/install-camera.sh
 ```
 
