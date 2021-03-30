@@ -332,7 +332,7 @@ try:
 		
 
 		# print(str(camera.resolution))
-		camera.sensor_mode = 3
+		#camera.sensor_mode = 3
 
 		print('\n Camera ' + version )
 		print('\n ----------------------------------------------------------------------')
@@ -505,7 +505,7 @@ try:
 	elif action == 'video':
 		Capture('video')
 	else:
-		Capture()
+		#Capture()
 
 except KeyboardInterrupt:
 	darkMode()
