@@ -22,11 +22,6 @@ dng = RPICAM2DNG()
 running = False
 statusDictionary = {'message': '', 'action': '', 'colorR': 0, 'colorG': 0, 'colorB': 0, 'colorW': 0}
 buttonDictionary = {'switchMode': 0, 'shutterUp': False, 'shutterDown': False, 'isoUp': False, 'isoDown': False, 'evUp': False, 'evDown': False, 'bracketUp': False, 'bracketDown': False, 'capture': False, 'captureVideo': False, 'isRecording': False, 'lightR': 0, 'lightB': 0, 'lightG': 0, 'lightW': 0}
-
-
-previewVisible = False
-previewWidth = 800
-previewHeight = 460
 	
 action = 'capture'
 
@@ -272,24 +267,6 @@ def getFilePath(timestamped = True, isVideo = False):
 
 # ------------------------------------------------------------------------------
 
-def showPreview(x = 0, y = 0, w = 800, h = 600):
-	global previewVisible
-	camera.start_preview(fullscreen=False, resolution=(w, h), window=(x, y, w, h))	
-	previewVisible = True
-	time.sleep(0.1)
-	return
-	
-# ------------------------------------------------------------------------------
-
-def hidePreview():
-	global previewVisible
-	camera.stop_preview()
-	previewVisible = False
-	time.sleep(0.1)
-	return
-
-# ------------------------------------------------------------------------------
-
 def captureImage(filepath, raw = True):
 	camera.capture(filepath, quality=100, bayer=raw)
 	if raw == True:
@@ -333,9 +310,6 @@ try:
 		pass
 	
 	def Capture(mode = 'persistent'):
-		global previewVisible
-		global previewWidth
-		global previewHeight
 		global shutter
 		global shutterLong
 		global shutterShort
@@ -373,7 +347,6 @@ try:
 		setAWB(awb, 0)
 		
 		showInstructions(False, 0)
-		showPreview(0, 0, previewWidth, previewHeight)
 		
 		while True:
 			try:
@@ -512,7 +485,6 @@ try:
 						buttonDictionary.update({'bracketDown': False})
 			except SystemExit:
 				running = False
-				hidePreview()
 				time.sleep(5)				
 				os.kill(os.getpid(), signal.SIGSTOP)
 				sys.exit(0)
