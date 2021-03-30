@@ -95,6 +95,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	allow_reuse_address = True
 	daemon_threads = True
 
+class Server():
 	def startStream(running, statusDictionary, buttonDictionary):
 		with PiCamera(resolution='960x540', framerate=24) as cameraModule:
 			output = StreamingOutput()

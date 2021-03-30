@@ -5,12 +5,12 @@ echo -e '\033[32mCamera Remote [Installation Script] \033[0m'
 echo -e '\033[32m-------------------------------------------------------------------------- \033[0m'
 echo -e ''
 echo -e '\033[93mUpdating package repositories... \033[0m'
-sudo apt update
+#sudo apt update
 
 echo ''
 echo -e '\033[93mInstalling prerequisites... \033[0m'
-sudo apt install -y git python3 python3-pip python3-picamera
-sudo pip3 install RPi.GPIO adafruit-circuitpython-neopixel
+#sudo apt install -y git python3 python3-pip python3-picamera
+#sudo pip3 install RPi.GPIO adafruit-circuitpython-neopixel
 
 #echo ''
 #echo -e '\033[93mInstalling DNG support... \033[0m'
@@ -44,9 +44,9 @@ sudo chmod +x server.py
 cd ~
 echo ''
 echo -e '\033[93mSetting up alias... \033[0m'
-sudo touch ~/.bash_aliases
-sudo sed -i '/\b\(function camera.remote\)\b/d' ~/.bash_aliases
-sudo sed -i '$ a function camera.remote { sudo python3 ~/camera.remote/camera.py "$@"; }' ~/.bash_aliases
+#sudo touch ~/.bash_aliases
+#sudo sed -i '/\b\(function camera.remote\)\b/d' ~/.bash_aliases
+#sudo sed -i '$ a function camera.remote { sudo python3 ~/camera.remote/camera.py "$@"; }' ~/.bash_aliases
 echo -e 'Please ensure that your camera and I2C interfaces are enabled in raspi-config before proceeding.'
 
 echo ''

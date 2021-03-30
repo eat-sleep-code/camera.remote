@@ -2,7 +2,7 @@
 from picamera import PiCamera
 from pydng.core import RPICAM2DNG
 from light import Light
-from server import StreamingServer
+from server import Server
 import datetime
 import fractions
 import os
