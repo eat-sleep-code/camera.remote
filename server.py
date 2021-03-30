@@ -98,7 +98,7 @@ class Server():
 	def startStream(camera, running, statusDictionary, buttonDictionary):
 		with camera:
 			output = StreamingOutput()
-			cameraModule.start_recording(output, format='mjpeg')
+			camera.start_recording(output, format='mjpeg')
 			hostname = subprocess.getoutput('hostname -I')
 			url = 'http://' + str(hostname)
 			print('\n Stream started: ' + url + '\n')
@@ -107,12 +107,12 @@ class Server():
 				server = StreamingServer(address, StreamingHandler)
 				server.serve_forever()
 			finally:
-				cameraModule.stop_recording()
+				camera.stop_recording()
 				print('\n Stream ended \n')
 
 	def stopStream():
 		with camera:
-			cameraModule.stop_recording()
+			camera.stop_recording()
 
 
 
