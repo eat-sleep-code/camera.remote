@@ -78,7 +78,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 				logging.warning(
 					'Removed streaming client %s: %s',
 					self.client_address, str(e))
-		if self.path == '/capture/photo':	
+		elif self.path == '/capture/photo':	
 			buttonDictionary.update({'capture': True})
 			print('click')
 		elif self.path == '/favicon.ico':
