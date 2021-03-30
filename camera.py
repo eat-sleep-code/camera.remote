@@ -2,7 +2,7 @@
 from picamera import PiCamera
 from pydng.core import RPICAM2DNG
 from light import Light
-from server import startStream, stopStream
+from server import StreamingServer
 import datetime
 import fractions
 import os
@@ -309,7 +309,7 @@ def createControls():
 	global buttonDictionary
 	
 	running = True
-	startStream(running, statusDictionary, buttonDictionary)
+	StreamingServer.startStream(running, statusDictionary, buttonDictionary)
 	
 # -------------------------------------------------------------------------------
 def darkMode():

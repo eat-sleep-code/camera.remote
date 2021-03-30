@@ -95,25 +95,24 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	allow_reuse_address = True
 	daemon_threads = True
 
+	def startStream(running, statusDictionary, buttonDictionary):
+		with PiCamera(resolution='960x540', framerate=24) as cameraModule:
+			output = StreamingOutput()
+			cameraModule.start_recording(output, format='mjpeg')
+			hostname = subprocess.getoutput('hostname -I')
+			url = 'http://' + str(hostname)
+			print('\n Stream started: ' + url + '\n')
+			try:
+				address = ('', 80)
+				server = StreamingServer(address, StreamingHandler)
+				server.serve_forever()
+			finally:
+				cameraModule.stop_recording()
+				print('\n Stream ended \n')
 
-def startStream(running, statusDictionary, buttonDictionary):
-	with PiCamera(resolution='960x540', framerate=24) as cameraModule:
-		output = StreamingOutput()
-		cameraModule.start_recording(output, format='mjpeg')
-		hostname = subprocess.getoutput('hostname -I')
-		url = 'http://' + str(hostname)
-		print('\n Stream started: ' + url + '\n')
-		try:
-			address = ('', 80)
-			server = StreamingServer(address, StreamingHandler)
-			server.serve_forever()
-		finally:
+	def stopStream():
+		with PiCamera(resolution=camera.MAX_RESOLUTION, framerate=30) as cameraModule:
 			cameraModule.stop_recording()
-			print('\n Stream ended \n')
-
-def stopStream():
-	with PiCamera(resolution=camera.MAX_RESOLUTION, framerate=30) as cameraModule:
-		cameraModule.stop_recording()
 
 
 
