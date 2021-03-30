@@ -2,6 +2,7 @@ import io
 import logging
 import socketserver
 import subprocess
+from picamera import PiCamera
 from threading import Condition
 from http import server
 
@@ -77,7 +78,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 				logging.warning(
 					'Removed streaming client %s: %s',
 					self.client_address, str(e))
-		elif self.path == '/capture/photo/':	
+		if self.path == '/capture/photo':	
 			buttonDictionary.update({'capture': True})
 			print('click')
 		elif self.path == '/favicon.ico':
@@ -95,22 +96,23 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 class Server():
 	def startStream(camera, running, statusDictionary, buttonDictionary):
-		print(camera.shutter_speed)
-		output = StreamingOutput()
-		camera.start_recording(output, format='mjpeg')
-		hostname = subprocess.getoutput('hostname -I')
-		url = 'http://' + str(hostname)
-		print('\n Stream started: ' + url + '\n')
-		try:
-			address = ('', 80)
-			server = StreamingServer(address, StreamingHandler)
-			server.serve_forever()
-		finally:
-			camera.stop_recording()
-			print('\n Stream ended \n')
+		with camera(resolution='960x540', framerate=24) as cameraModule:
+			output = StreamingOutput()
+			cameraModule.start_recording(output, format='mjpeg')
+			hostname = subprocess.getoutput('hostname -I')
+			url = 'http://' + str(hostname)
+			print('\n Stream started: ' + url + '\n')
+			try:
+				address = ('', 80)
+				server = StreamingServer(address, StreamingHandler)
+				server.serve_forever()
+			finally:
+				cameraModule.stop_recording()
+				print('\n Stream ended \n')
 
-	def stopStream(camera):
-		camera.stop_recording()
+	def stopStream():
+		with camera(resolution=camera.MAX_RESOLUTION, framerate=30) as cameraModule:
+			cameraModule.stop_recording()
 
 
 
