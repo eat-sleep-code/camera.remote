@@ -2,7 +2,6 @@ import io
 import logging
 import socketserver
 import subprocess
-import camera
 from picamera import PiCamera
 from threading import Condition
 from http import server
