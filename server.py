@@ -99,6 +99,7 @@ class Server():
 		with camera:
 			output = StreamingOutput()
 			camera.start_recording(output, format='mjpeg')
+			print(camera.exposure_mode)
 			hostname = subprocess.getoutput('hostname -I')
 			url = 'http://' + str(hostname)
 			print('\n Stream started: ' + url + '\n')

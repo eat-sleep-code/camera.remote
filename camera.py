@@ -17,7 +17,7 @@ version = '2021.03.30'
 
 camera = PiCamera()
 PiCamera.CAPTURE_TIMEOUT = 1500
-camera.resolution = camera.MAX_RESOLUTION
+#camera.resolution = camera.MAX_RESOLUTION
 dng = RPICAM2DNG()
 running = False
 statusDictionary = {'message': '', 'action': '', 'colorR': 0, 'colorG': 0, 'colorB': 0, 'colorW': 0}
