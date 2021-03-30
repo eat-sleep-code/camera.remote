@@ -505,7 +505,7 @@ try:
 	elif action == 'video':
 		Capture('video')
 	else:
-		#Capture()
+		Capture()
 
 except KeyboardInterrupt:
 	darkMode()
