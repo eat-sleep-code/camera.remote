@@ -96,7 +96,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 class Server():
 	def startStream(camera, running, statusDictionary, buttonDictionary):
-		with camera(resolution='960x540', framerate=24) as cameraModule:
+		with camera:
 			output = StreamingOutput()
 			cameraModule.start_recording(output, format='mjpeg')
 			hostname = subprocess.getoutput('hostname -I')
@@ -111,7 +111,7 @@ class Server():
 				print('\n Stream ended \n')
 
 	def stopStream():
-		with camera(resolution=camera.MAX_RESOLUTION, framerate=30) as cameraModule:
+		with camera:
 			cameraModule.stop_recording()
 
 
