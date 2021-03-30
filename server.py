@@ -96,7 +96,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 class Server():
 	def startStream(camera, running, statusDictionary, buttonDictionary):
-		camera.resolution(960, 540)
+		camera.resolution = (960, 540)
 		camera.framerate = 24
 		with camera:
 			output = StreamingOutput()
