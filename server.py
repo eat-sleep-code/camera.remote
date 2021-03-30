@@ -2,7 +2,6 @@ import io
 import logging
 import socketserver
 import subprocess
-from picamera import PiCamera
 from threading import Condition
 from http import server
 
@@ -78,7 +77,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 				logging.warning(
 					'Removed streaming client %s: %s',
 					self.client_address, str(e))
-		if self.path == '/capture/photo':	
+		elif self.path == '/capture/photo/':	
 			buttonDictionary.update({'capture': True})
 			print('click')
 		elif self.path == '/favicon.ico':
@@ -96,6 +95,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 class Server():
 	def startStream(camera, running, statusDictionary, buttonDictionary):
+		print(camera.shutter_speed)
 		output = StreamingOutput()
 		camera.start_recording(output, format='mjpeg')
 		hostname = subprocess.getoutput('hostname -I')
