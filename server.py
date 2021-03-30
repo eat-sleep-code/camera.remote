@@ -103,13 +103,13 @@ class Server():
 			hostname = subprocess.getoutput('hostname -I')
 			url = 'http://' + str(hostname)
 			print('\n Stream started: ' + url + '\n')
-			try:
-				address = ('', 80)
-				server = StreamingServer(address, StreamingHandler)
-				server.serve_forever()
-			finally:
-				camera.stop_recording()
-				print('\n Stream ended \n')
+			#try:
+			address = ('', 80)
+			server = StreamingServer(address, StreamingHandler)
+			server.serve_forever()
+			#finally:
+			#	camera.stop_recording()
+			#	print('\n Stream ended \n')
 
 	def stopStream():
 		with camera:
