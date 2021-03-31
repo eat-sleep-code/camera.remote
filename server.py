@@ -31,10 +31,12 @@ PAGE="""\
 		{
 			align-items: center; 
 			background: rgba(8, 8, 8, 1.0); 
+			box-sizing: border-box;
 			display: flex; 
 			flex-wrap: wrap;
 			height: 100vh;
-			justify-content: center; 
+			justify-content: center;
+			padding-bottom: 60px; 
 			width: 100vw; 
 		}
 
@@ -88,6 +90,12 @@ PAGE="""\
 			text-align: center;
 			text-decoration: none;
 			width: 42px;
+			opacity: 0.9;
+		}
+
+		.control-button:hover
+		{
+			opacity: 1.0;
 		}
 
 		.control-button.white
@@ -127,11 +135,12 @@ PAGE="""\
 
 		.control-button.blue.dim
 		{
-			color: rgba(0, 0, 255, 0.4);
+			color: rgba(0, 0, 255, 0.5);
 		}
 	</style>
 	<script>
 		var controls = document.querySelectorAll('.control-button');
+		controls.forEach(element => console.log(element));
 		controls.forEach(element => element.addEventListener('click', event => {
 			var url = event.target.href;
 			console.log(url);
