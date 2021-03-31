@@ -225,7 +225,7 @@ PAGE="""\
 		}
 
 		async function cycleImage() {
-			document.getElementsByClassName('stream')[0].style.height = Math.round((document.getElementsByClassName('stream')[0].scrollWidth * 0.5625) + 'px';
+			document.getElementsByClassName('stream')[0].style.height = Math.round(document.getElementsByClassName('stream')[0].scrollWidth * 0.5625) + 'px';
 			await sleep(1000);
 			document.getElementsByClassName('stream')[0].src='blank.jpg';
 			await sleep(1000);
