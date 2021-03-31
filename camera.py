@@ -104,7 +104,10 @@ def setShutter(input, wait = 0):
 			camera.framerate=fractions.Fraction(5, 1000)
 		elif camera.framerate != defaultFramerate and shutter <= shutterLongThreshold:
 			camera.framerate = defaultFramerate
-	
+	except Exception as ex:
+		print( ' WARNING: Could not set framerate! ')
+
+	try:
 		if shutter == 0:
 			camera.shutter_speed = 0
 			#print(str(camera.shutter_speed) + '|' + str(camera.framerate) + '|' + str(shutter))	
@@ -409,7 +412,6 @@ try:
 
 					# Video
 					if isRecording == False:
-						server.stopStream(camera);		
 						isRecording = True
 						statusDictionary.update({'action': 'recording'})
 						filepath = getFilePath(True, True)
@@ -423,10 +425,7 @@ try:
 						statusDictionary.update({'action': ''})
 						camera.stop_recording()
 						camera.resolution = camera.MAX_RESOLUTION
-						try:
-							server.startStream(camera, running, statusDictionary, buttonDictionary)
-						finally:
-							print(' Capture complete \n')
+						print(' Capture complete \n')
 						statusDictionary.update({'message': ' Recording: Stopped '})
 						buttonDictionary.update({'captureVideo': False})
 							
@@ -434,16 +433,13 @@ try:
 
 				# Shutter Speed	
 				elif buttonDictionary['shutterUp'] == True:
-					server.stopStream(camera)
 					if shutter == 0:
 						shutter = shutterShort
 					if shutter > shutterShort and shutter <= shutterLong:					
 						shutter = int(shutter / 1.5)
 					setShutter(shutter, 0.25)
 					buttonDictionary.update({'shutterUp': False})
-					server.startStream(camera, running, statusDictionary, buttonDictionary)
 				elif buttonDictionary['shutterDown'] == True:
-					server.stopStream(camera)
 					if shutter == 0:						
 						shutter = shutterLong
 					elif shutter < shutterLong and shutter >= shutterShort:					
@@ -451,7 +447,6 @@ try:
 					elif shutter == shutterShort:
 						shutter = 0
 					setShutter(shutter, 0.25)
-					buttonDictionary.update({'shutterDown': False})
 					server.startStream(camera, running, statusDictionary, buttonDictionary)
 				# ISO
 				elif buttonDictionary['isoUp'] == True:

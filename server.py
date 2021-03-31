@@ -397,7 +397,6 @@ def stopStream(camera):
 		try:
 			camera.stop_recording()
 		finally:
-			camera = PiCamera()
 			camera.resolution =  camera.MAX_RESOLUTION
 
 
