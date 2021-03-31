@@ -243,13 +243,13 @@ PAGE="""\
 
 		async function monitorStatus() {
 			try {
-				let lastStatus = '';
+				var lastStatus = '';
 				while (true) {
-					let url = '/status';
-					let xhr = new XMLHttpRequest();
+					var url = '/status';
+					var xhr = new XMLHttpRequest();
 					xhr.open('GET', url);
 					xhr.send();
-					let status = xhr.reponse;
+					var status = xhr.reponse;
 					if (status !== lastStatus && status !== 'Ready') {
 						lastStatus = status;
 						document.getElementsByClassName('status')[0].innerHTML = status;
@@ -278,10 +278,10 @@ PAGE="""\
 			}
 		}
 
-		let controls = document.querySelectorAll('.control-button');
+		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
-			let url = event.target.href;
-			let xhr = new XMLHttpRequest();
+			var url = event.target.href;
+			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
 			event.preventDefault();
