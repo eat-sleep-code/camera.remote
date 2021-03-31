@@ -49,11 +49,21 @@ PAGE="""\
 			justify-content: center;
 		}
 
+		.stream-wrapper 
+		{
+			height: auto;
+			overflow: hidden;
+			padding-bottom: 56.25%;
+			width: 100%;	
+		}
+
 		.stream
 		{
 			border-radius: 4px;
 			max-width: 960px;
 			width: 100%; 
+			position: absolute !important;
+			top: 0;
 		}
 
 		.controls
@@ -151,7 +161,7 @@ PAGE="""\
 </head>
 <body>
 	<div class="wrapper">
-		<div>
+		<div class="stream-wrapper">
 			<img src="stream.mjpg" class="stream" />
 		</div>
 		<div class="controls">
