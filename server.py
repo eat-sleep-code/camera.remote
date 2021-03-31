@@ -388,13 +388,13 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 	global buttonDictionary
 	buttonDictionary = parentButtonDictionary
 	camera.resolution = (1920, 1080)
-	#camera.framerate = 24
+	camera.framerate = 30
 	with camera:
 		output = StreamingOutput()
 		camera.start_recording(output, format='mjpeg')
 		hostname = subprocess.getoutput('hostname -I')
 		url = 'http://' + str(hostname)
-		print('\n Stream started: ' + url + '\n')
+		print('\n Remote Interface: ' + url + '\n')
 		try:
 			address = ('', 80)
 			server = StreamingServer(address, StreamingHandler)
