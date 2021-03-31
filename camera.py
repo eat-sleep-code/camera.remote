@@ -413,7 +413,7 @@ try:
 					# Video
 					if isRecording == False:
 						if (camera.recording == True):
-							server.pauseStream() # Prevent simultaneous attempts to record
+							server.pauseStream(camera) # Prevent simultaneous attempts to record
 						isRecording = True
 						statusDictionary.update({'action': 'recording'})
 						filepath = getFilePath(True, True)
