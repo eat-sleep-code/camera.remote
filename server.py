@@ -64,7 +64,7 @@ PAGE="""\
 			font-size: 12px;
 			height: 24px;
 			line-height: 12px;
-			margin-top: -24px 0 0 0;
+			margin: -24px 0 0 0;
 			max-width: 960px;
 			padding: 8px;
 			text-align: center;
@@ -317,7 +317,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			except Exception as ex:
 				pass
 		elif self.path == '/status':
-			content = statusDictionary['message']
+			content = statusDictionary['message'].encode('utf-8')
 			self.send_response(200)
 			self.send_header('Content-Type', 'text/html')
 			self.send_header('Content-Length', len(content))
