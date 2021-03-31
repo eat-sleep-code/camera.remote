@@ -70,6 +70,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 						frame = output.frame
 					self.wfile.write(b'--FRAME\r\n')
 					self.send_header('Content-Type', 'image/jpeg')
+					print(len(frame))
 					self.send_header('Content-Length', len(frame))
 					self.end_headers()
 					self.wfile.write(frame)
@@ -101,7 +102,6 @@ class Server():
 		with camera:
 			output = StreamingOutput()
 			camera.start_recording(output, format='mjpeg')
-			print(camera.exposure_mode)
 			hostname = subprocess.getoutput('hostname -I')
 			url = 'http://' + str(hostname)
 			print('\n Stream started: ' + url + '\n')
