@@ -251,15 +251,29 @@ PAGE="""\
 			document.getElementsByClassName('stream')[0].removeAttribute("style") // Return to responsive behavior
 		}
 
-		var controls = document.querySelectorAll('.control-button');
+		let controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
-			var url = event.target.href;
-			var xhr = new XMLHttpRequest();
+			let url = event.target.href;
+			let xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
 			event.preventDefault();
 			cycleImage();
 		}));
+
+		let lastStatus = '';
+		while (true) {
+			let url = '/status';
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', url);
+			xhr.send();
+			status = xhr.reponse;
+			if (status !== lastStatus) {
+				status = lastStatus;
+				document.getElementsByClassName('status')[0].innerHTML = status;
+			}
+			await sleep(1000);
+		}
 	</script>
 </body>
 </html>
