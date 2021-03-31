@@ -371,7 +371,6 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	allow_reuse_address = True
 	daemon_threads = True
-	logging = False
 
 
 def startStream(camera, running, statusDictionary, parentButtonDictionary):
@@ -389,6 +388,7 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 		try:
 			address = ('', 80)
 			server = StreamingServer(address, StreamingHandler)
+			server.logging = False
 			server.serve_forever()
 		finally:
 			camera.stop_recording()
