@@ -211,10 +211,12 @@ PAGE="""\
 	</div>
 	<script>
 		var controls = document.querySelectorAll('.control-button');
-		controls.forEach(element => console.log(element));
 		controls.forEach(element => element.addEventListener('click', event => {
 			var url = event.target.href;
 			console.log(url);
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', url);
+			xhr.send();
 			event.preventDefault();
 		}));
 	</script>
