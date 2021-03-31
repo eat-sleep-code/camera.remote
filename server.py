@@ -18,32 +18,82 @@ PAGE="""\
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<meta name="application-name" content="Camera Zero">
 	<meta name="theme-color" content="#000000">
+	<style>
+		body 
+		{
+			margin: 0; 
+			padding: 0;
+		}
+
+		.wrapper 
+		{
+			align-items: center; 
+			background: rgba(8, 8, 8, 1.0); 
+			display: flex; 
+			flex-wrap: wrap;
+			height: 100vh;
+			justify-content: center; 
+			width: 100vw; 
+		}
+
+		.stream
+		{
+			max-width: 960px;
+			style="width: 100%; 
+		}
+
+		.controls
+		{
+			display: flex;
+			width: 100%; 
+		}
+
+		.control-button
+		{
+			border: solid 1px rgba(255, 255, 255, 1.0);
+			border-radius: 4px;
+			color: rgba(255, 255, 255, 1.0);
+			display: inline-block;
+			font-size: 20px;
+			height: 42px;
+			text-decoration: none;
+			width: 42px;
+		}
+	</style>
+	<script>
+		var controls = document.getElementsByClassName('control-button');
+		controls.forEach(element => element.addEventListener('click', event => {
+			var url = event.target.href;
+			console.log(url);
+			event.preventDefault();
+		}));
+	</script>
 </head>
-<body style="margin: 0; padding: 0;">
-	<div style="background: rgba(8, 8, 8, 1.0); display: flex; align-items: center; width: 100vw; justify-content: center; height: 100vh;">
+<body>
+	<div class="wrapper">
 		<div>
-			<img src="stream.mjpg" style="width: 100%; max-width: 960px;" />
+			<img src="stream.mjpg" class="stream" />
 		</div>
-		<div style="width: 100%; display: flex;">
+		<div class="controls">
 			<div>
-				<a href="/capture/photo">Photo</a>
-				<a href="/capture/video">Video</a>
+				<a href="/capture/photo" class="control-button">Photo</a>
+				<a href="/capture/video" class="control-button">Video</a>
 			</div>
 			<div>
-				<a href="/shutter/up">&#8853;</a>
-				<a href="/shutter/down">&#8854;</a>
+				<a href="/shutter/up" class="control-button">&#8853;</a>
+				<a href="/shutter/down" class="control-button">&#8854;</a>
 			</div>
 			<div>
-				<a href="/iso/up">&#8853;</a>
-				<a href="/iso/down">&#8854;</a>
+				<a href="/iso/up" class="control-button">&#8853;</a>
+				<a href="/iso/down" class="control-button">&#8854;</a>
 			</div>
 			<div>
-				<a href="/ev/up">&#8853;</a>
-				<a href="/ev/down">&#8854;</a>
+				<a href="/ev/up" class="control-button">&#8853;</a>
+				<a href="/ev/down" class="control-button">&#8854;</a>
 			</div>
 			<div>
-				<a href="/bracket/up">&#8853;</a>
-				<a href="/bracket/down">&#8854;</a>
+				<a href="/bracket/up" class="control-button">&#8853;</a>
+				<a href="/bracket/down" class="control-button">&#8854;</a>
 			</div>
 		</div>
 	</div>
