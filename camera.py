@@ -418,11 +418,14 @@ try:
 						isRecording = True
 						statusDictionary.update({'action': 'recording'})
 						filepath = getFilePath(True, True)
-						camera.resolution = (1920, 1080)
-						print(' Capturing video: ' + filepath + '\n')
-						statusDictionary.update({'message': ' Recording: Started '})
-						buttonDictionary.update({'captureVideo': False})
-						camera.start_recording(filepath, quality=20)
+						try:
+							camera.resolution = (1920, 1080)
+							print(' Capturing video: ' + filepath + '\n')
+							statusDictionary.update({'message': ' Recording: Started '})
+							buttonDictionary.update({'captureVideo': False})
+							camera.start_recording(filepath, quality=20)
+						except Exception as ex:
+							print('Error occurred when trying to record' + str(ex))
 					else:
 						isRecording = False
 						statusDictionary.update({'action': ''})
