@@ -124,7 +124,7 @@ def setShutter(input, wait = 0):
 		time.sleep(wait)
 		return
 	except Exception as ex:
-		print(' WARNING: Invalid Shutter Speed!' + str(shutter))
+		print(' WARNING: Invalid Shutter Speed! ' + str(shutter) + '\n ' + ex)
 
 # ------------------------------------------------------------------------------				
 
@@ -423,11 +423,13 @@ try:
 						statusDictionary.update({'action': ''})
 						camera.stop_recording()
 						camera.resolution = camera.MAX_RESOLUTION
-						print(' Capture complete \n')
+						try:
+							server.startStream(camera, running, statusDictionary, buttonDictionary)
+						finally:
+							print(' Capture complete \n')
 						statusDictionary.update({'message': ' Recording: Stopped '})
 						buttonDictionary.update({'captureVideo': False})
-						server.startStream(camera, running, statusDictionary, buttonDictionary)
-
+							
 					time.sleep(1)
 
 				# Shutter Speed	
