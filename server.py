@@ -446,7 +446,7 @@ def startStream(camera, running, parentStatusDictionary, parentButtonDictionary)
 		print('\n Stream ended \n')
 
 
-def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
+def resumeStream(camera, running, parentStatusDictionary, parentButtonDictionary):
 	global output
 	global statusDictionary 
 	global buttonDictionary
