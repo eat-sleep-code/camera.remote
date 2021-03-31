@@ -412,7 +412,7 @@ def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
 	camera.resolution = (1920, 1080)
 	camera.framerate = 30
 	output = StreamingOutput()
-	print(output)
+	print(output.file='stream.mjpeg#1')
 	camera.start_recording(output, format='mjpeg')
 	print(" Resuming preview... ")
 
