@@ -95,27 +95,27 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	allow_reuse_address = True
 	daemon_threads = True
 
-class Server():
-	def startStream(camera, running, statusDictionary, buttonDictionary):
-		camera.resolution = (960, 540)
-		#camera.framerate = 24
-		with camera:
-			output = StreamingOutput()
-			camera.start_recording(output, format='mjpeg')
-			hostname = subprocess.getoutput('hostname -I')
-			url = 'http://' + str(hostname)
-			print('\n Stream started: ' + url + '\n')
-			#try:
-			address = ('', 80)
-			server = StreamingServer(address, StreamingHandler)
-			server.serve_forever()
-			#finally:
-			#	camera.stop_recording()
-			#	print('\n Stream ended \n')
 
-	def stopStream():
-		with camera:
-			camera.stop_recording()
+def startStream(camera, running, statusDictionary, buttonDictionary):
+	camera.resolution = (960, 540)
+	#camera.framerate = 24
+	with camera:
+		output = StreamingOutput()
+		camera.start_recording(output, format='mjpeg')
+		hostname = subprocess.getoutput('hostname -I')
+		url = 'http://' + str(hostname)
+		print('\n Stream started: ' + url + '\n')
+		#try:
+		address = ('', 80)
+		server = StreamingServer(address, StreamingHandler)
+		server.serve_forever()
+		#finally:
+		#	camera.stop_recording()
+		#	print('\n Stream ended \n')
+
+def stopStream():
+	with camera:
+		camera.stop_recording()
 
 
 
