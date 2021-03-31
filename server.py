@@ -81,9 +81,24 @@ PAGE="""\
 			text-decoration: none;
 			width: 42px;
 		}
+
+		.control-button.red
+		{
+			color: rgba(255, 0, 0, 1.0);
+		}
+
+		.control-button.green
+		{
+			color: rgba(0, 255, 0, 1.0);
+		}
+
+		.control-button.blue
+		{
+			color: rgba(0, 0, 255, 1.0);
+		}
 	</style>
 	<script>
-		var controls = document.getElementsByClassName('control-button');
+		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
 			var url = event.target.href;
 			console.log(url);
@@ -130,6 +145,20 @@ PAGE="""\
 				<div>
 					<a href="/bracket/up" class="control-button">&#8853;</a>
 					<a href="/bracket/down" class="control-button">&#8854;</a>
+				</div>
+			</div>
+			<br />
+			<div class="control-group">
+				<label>Lighting</label>
+				<div>
+					<a href="/light/white/up" class="control-button">&#9728;</a>
+					<a href="/light/white/down" class="control-button">&#9788;</a>
+					<a href="/light/red/up" class="control-button red">&#9728;</a>
+					<a href="/light/red/down" class="control-button red">&#9788;</a>
+					<a href="/light/green/up" class="control-button green">&#9728;</a>
+					<a href="/light/green/down" class="control-button green">&#9788;</a>
+					<a href="/light/blue/up" class="control-button blue">&#9728;</a>
+					<a href="/light/blue/down" class="control-button blue">&#9788;</a>
 				</div>
 			</div>
 		</div>
