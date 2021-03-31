@@ -317,7 +317,7 @@ PAGE="""\
 			
 			/* Toggle blink on record button */
 			if (url == '/control/capture/video') {
-				if element.classList.contains('blink') {
+				if (element.classList.contains('blink')) {
 					element.classList.remove('blink');
 				}
 				else {
