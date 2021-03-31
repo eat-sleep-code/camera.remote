@@ -226,6 +226,10 @@ PAGE="""\
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
+			if (url.endsWith('/control/capture/video')) {
+				document.getElementsByClassName('stream')[0].src="blank.jpg"
+				document.getElementsByClassName('stream')[0].src="stream.mjpg"
+			}
 			event.preventDefault();
 		}));
 	</script>
