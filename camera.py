@@ -412,6 +412,8 @@ try:
 
 					# Video
 					if isRecording == False:
+						if (camera.recording == True):
+							camera.stop_recording() # Prevent simultaneous attempts to record when isRecording is inaccurate
 						isRecording = True
 						statusDictionary.update({'action': 'recording'})
 						filepath = getFilePath(True, True)
@@ -419,8 +421,6 @@ try:
 						print(' Capturing video: ' + filepath + '\n')
 						statusDictionary.update({'message': ' Recording: Started '})
 						buttonDictionary.update({'captureVideo': False})
-						if (camera.recording == True):
-							camera.stop_recording()
 						camera.start_recording(filepath, quality=20)
 					else:
 						isRecording = False
@@ -431,7 +431,7 @@ try:
 						statusDictionary.update({'message': ' Recording: Stopped '})
 						buttonDictionary.update({'captureVideo': False})
 						if (camera.recording == False):
-							server.startStream(camera, running, statusDictionary, buttonDictionary)
+							server.resumeStream(camera, running, statusDictionary, buttonDictionary)
 							
 					time.sleep(1)
 

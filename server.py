@@ -398,11 +398,24 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 		try:
 			address = ('', 80)
 			server = StreamingServer(address, StreamingHandler)
+			server.allow_reuse_address = True
 			server.logging = False
 			server.serve_forever()
 		finally:
 			camera.stop_recording()
 			print('\n Stream ended \n')
+
+
+def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
+	global output
+	global buttonDictionary
+	buttonDictionary = parentButtonDictionary
+	camera.resolution = (1920, 1080)
+	camera.framerate = 30
+	with camera:
+		output = StreamingOutput()
+		camera.start_recording(output, format='mjpeg')
+
 
 def stopStream(camera):
 	with camera:
