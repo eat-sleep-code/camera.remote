@@ -367,9 +367,11 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			self.send_error(404)
 			self.end_headers()
 
+
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	allow_reuse_address = True
 	daemon_threads = True
+	logging = False
 
 
 def startStream(camera, running, statusDictionary, parentButtonDictionary):
