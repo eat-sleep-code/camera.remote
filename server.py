@@ -262,7 +262,7 @@ PAGE="""\
 				console.warn('Could not update status', ex);
 			}
 		}
-		monitorStatus();
+		var currentStatus = monitorStatus();
 
 		async function cycleImage() {
 			try {
