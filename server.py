@@ -241,21 +241,6 @@ PAGE="""\
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
 
-		async function cycleImage() {
-			try {
-				// This makes the browser aware that the stream has resumed
-				document.getElementsByClassName('stream')[0].style.height = Math.round(document.getElementsByClassName('stream')[0].scrollWidth * 0.5625) + 'px';
-				await sleep(1000);
-				document.getElementsByClassName('stream')[0].src='blank.jpg';
-				await sleep(500);
-				document.getElementsByClassName('stream')[0].src='stream.mjpg';
-				document.getElementsByClassName('stream')[0].removeAttribute("style") // Return to responsive behavior
-			}
-			catch(ex) {
-				console.warn('Could not cycle image', ex);
-			}
-		}
-
 		async function monitorStatus() {
 			try {
 				let lastStatus = '';
@@ -274,6 +259,22 @@ PAGE="""\
 			}
 			catch(ex) {
 				console.warn('Could not update status', ex);
+			}
+		}
+		monitorStatus();
+
+		async function cycleImage() {
+			try {
+				// This makes the browser aware that the stream has resumed
+				document.getElementsByClassName('stream')[0].style.height = Math.round(document.getElementsByClassName('stream')[0].scrollWidth * 0.5625) + 'px';
+				await sleep(1000);
+				document.getElementsByClassName('stream')[0].src='blank.jpg';
+				await sleep(500);
+				document.getElementsByClassName('stream')[0].src='stream.mjpg';
+				document.getElementsByClassName('stream')[0].removeAttribute("style") // Return to responsive behavior
+			}
+			catch(ex) {
+				console.warn('Could not cycle image', ex);
 			}
 		}
 
