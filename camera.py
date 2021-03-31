@@ -413,6 +413,7 @@ try:
 					# Video
 					if isRecording == False:
 						if (camera.recording == True):
+							print('Pausing...')
 							server.pauseStream(camera) # Prevent simultaneous attempts to record
 						isRecording = True
 						statusDictionary.update({'action': 'recording'})
@@ -431,6 +432,7 @@ try:
 						statusDictionary.update({'message': ' Recording: Stopped '})
 						buttonDictionary.update({'captureVideo': False})
 						if (camera.recording == False):
+							print('Resuming...')
 							server.resumeStream(camera, running, statusDictionary, buttonDictionary)
 							
 					time.sleep(1)
