@@ -46,7 +46,10 @@ PAGE="""\
 
 		.controls
 		{
+			align-items: center;
 			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
 		}
 
 		.control-group
@@ -54,7 +57,8 @@ PAGE="""\
 			margin: 0 8px;
 		}
 
-		.control-group label 
+		.control-group label,
+		.controls > label 
 		{
 			align-items: center;
 			font-size: 12px;
@@ -65,7 +69,11 @@ PAGE="""\
 			padding: 6px;
 			text-align: center;
 			width: 90px;
-			
+		}
+
+		.controls > label
+		{
+			width: 100%;
 		}
 
 		.control-button
@@ -89,7 +97,7 @@ PAGE="""\
 
 		.control-button.white.dim
 		{
-			color: rgba(255, 255, 255, 0.5);
+			color: rgba(255, 255, 255, 0.4);
 		}
 
 		.control-button.red
@@ -99,7 +107,7 @@ PAGE="""\
 
 		.control-button.red.dim
 		{
-			color: rgba(255, 0, 0, 0.5);
+			color: rgba(255, 0, 0, 0.4);
 		}
 
 		.control-button.green
@@ -109,7 +117,7 @@ PAGE="""\
 
 		.control-button.green.dim
 		{
-			color: rgba(0, 255, 0, 0.5);
+			color: rgba(0, 255, 0, 0.4);
 		}
 
 		.control-button.blue
@@ -119,7 +127,7 @@ PAGE="""\
 
 		.control-button.blue.dim
 		{
-			color: rgba(0, 0, 255, 1.0);
+			color: rgba(0, 0, 255, 0.4);
 		}
 	</style>
 	<script>
