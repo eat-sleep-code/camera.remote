@@ -13,11 +13,11 @@ PAGE="""\
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Camera Zero</title>
+	<title>Camera Remote</title>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-	<meta name="application-name" content="Camera Zero">
+	<meta name="application-name" content="Camera Remote">
 	<meta name="theme-color" content="#000000">
 	<style>
 		body 
@@ -54,6 +54,21 @@ PAGE="""\
 			border-radius: 4px;
 			max-width: 960px;
 			width: 100%; 
+		}
+
+		.status 
+		{
+			background: rgba(0, 0, 0, 0.5);
+			box-sizing: border-box;
+			font-size: 12px;
+			height: 24px;
+			line-height: 12px;
+			margin-top: -24px 0 0 0;
+			max-width: 960px;
+			padding: 8px;
+			text-align: center;
+			width: 100%;
+			z-index: 1000;
 		}
 
 		.controls
@@ -153,6 +168,7 @@ PAGE="""\
 	<div class="wrapper">
 		<div>
 			<img src="stream.mjpg" class="stream" />
+			<div class="status"></div>
 		</div>
 		<div class="controls">
 			<div class="control-group">
@@ -192,7 +208,7 @@ PAGE="""\
 			</div>
 		</div>
 		<div class="controls">
-			<label>Lighting</label>
+			<label>Scene Lighting</label>
 			<div class="control-group">
 				<div>
 					<a href="/control/light/white/up" class="control-button white">&#9728;</a>
@@ -225,11 +241,13 @@ PAGE="""\
 		}
 
 		async function cycleImage() {
+			// This makes the browser aware that the stream has resumed
 			document.getElementsByClassName('stream')[0].style.height = Math.round(document.getElementsByClassName('stream')[0].scrollWidth * 0.5625) + 'px';
 			await sleep(1000);
 			document.getElementsByClassName('stream')[0].src='blank.jpg';
-			await sleep(1000);
+			await sleep(500);
 			document.getElementsByClassName('stream')[0].src='stream.mjpg';
+			document.getElementsByClassName('stream')[0].removeAttribute("style") // Return to responsive behavior
 		}
 
 		var controls = document.querySelectorAll('.control-button');

@@ -13,7 +13,7 @@ import threading
 import time
 
 
-version = '2021.03.30'
+version = '2021.03.31'
 
 camera = PiCamera()
 PiCamera.CAPTURE_TIMEOUT = 1500
@@ -420,7 +420,7 @@ try:
 						statusDictionary.update({'message': ' Recording: Started '})
 						buttonDictionary.update({'captureVideo': False})
 						camera.start_recording(filepath, quality=20)
-						print(' Capturing video: ' + filepath + '\n')
+						print(' Capturing video: ' + filepath)
 						
 					else:
 						isRecording = False
