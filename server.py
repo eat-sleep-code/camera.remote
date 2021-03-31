@@ -317,12 +317,7 @@ PAGE="""\
 			
 			/* Toggle blink on record button */
 			if (url == '/control/capture/video') {
-				if (event.classList.contains('blink')) {
-					event.classList.remove('blink');
-				}
-				else {
-					event.classList.add('blink');
-				}
+				console.log('was here')
 			}
 		}));
 
