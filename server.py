@@ -305,10 +305,6 @@ PAGE="""\
 			}
 		}
 
-		
-		function toggleBlink(element) {
-			if element.href
-		}
 
 		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
