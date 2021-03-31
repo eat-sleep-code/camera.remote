@@ -399,7 +399,6 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 			address = ('', 80)
 			server = StreamingServer(address, StreamingHandler)
 			server.logging = False
-			server.
 			server.serve_forever()
 		finally:
 			camera.stop_recording()
