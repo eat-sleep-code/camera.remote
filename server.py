@@ -46,6 +46,7 @@ PAGE="""\
 		{
 			width: 100%;
 			display: flex;
+			flex-wrap: wrap;
 			justify-content: center;
 		}
 
@@ -316,7 +317,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			except Exception as ex:
 				pass
 		elif self.path == '/status':
-			content = statusDictionary
+			content = statusDictionary['message']
 			self.send_response(200)
 			self.send_header('Content-Type', 'text/html')
 			self.send_header('Content-Length', len(content))
