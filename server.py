@@ -250,8 +250,8 @@ class StreamingOutput(object):
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
 	def log_message(self, format, *args):
-		pass:
-			
+		pass
+
 	def do_GET(self):
 		global output
 		global buttonDictionary
