@@ -116,9 +116,9 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera):
+def startStream(camera, running, statusDictionary, buttonDictionary):
 	global output
-	global buttonDictionary
+	print(buttonDictionary['capture'])
 	camera.resolution = (960, 540)
 	#camera.framerate = 24
 	with camera:
