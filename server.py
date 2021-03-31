@@ -220,26 +220,25 @@ PAGE="""\
 		</div>
 	</div>
 	<script>
-		function sleep(milliseconds) {
-			const date = Date.now();
-			let currentDate = null;
-			do {
-				currentDate = Date.now();
-			} while (currentDate - date < milliseconds);
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
 		}
+
+		async function cycleImage() {
+			await sleep(1000);
+			document.getElementsByClassName('stream')[0].src="blank.jpg";
+			await sleep(1000);
+			document.getElementsByClassName('stream')[0].src="stream.mjpg";
+		}
+		
 		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
 			var url = event.target.href;
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
-			if (url.endsWith('/control/capture/video')) {
-				sleep(1000)
-				document.getElementsByClassName('stream')[0].src="blank.jpg"
-				sleep(1000)
-				document.getElementsByClassName('stream')[0].src="stream.mjpg"
-			}
 			event.preventDefault();
+			cycleImage();
 		}));
 	</script>
 </body>
