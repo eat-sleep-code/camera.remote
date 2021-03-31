@@ -241,7 +241,7 @@ PAGE="""\
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
 
-		async function monitorStatus() {
+		async function updateStatus() {
 			var lastStatus = '';
 			var url = '/status';
 			
@@ -262,15 +262,18 @@ PAGE="""\
 			};
 			xhr.send(null);
 		}
-		try {
-			while (true) {
-				await monitorStatus();
-				await sleep(1000);
+		async function monitorStatus() {
+			try {
+				while (true) {
+					await updateStatus();
+					await sleep(1000);
+				}
+			}
+			catch(ex) {
+				console.warn('Could not update status', ex);
 			}
 		}
-		catch(ex) {
-			console.warn('Could not update status', ex);
-		}
+		monitorStatus();
 		
 		
 
