@@ -286,6 +286,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 
 	def do_GET(self):
 		global output
+		global statusDictionary
 		global buttonDictionary
 		if self.path == '/':
 			content = PAGE.encode('utf-8')
@@ -314,6 +315,13 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 					self.wfile.write(b'\r\n')
 			except Exception as ex:
 				pass
+		elif self.path == '/status':
+			content = statusDictionary
+			self.send_response(200)
+			self.send_header('Content-Type', 'text/html')
+			self.send_header('Content-Length', len(content))
+			self.end_headers()
+			self.wfile.write(content)
 		elif self.path.startswith('/control/'):
 			if self.path == '/control/capture/photo':	
 				buttonDictionary.update({'capture': True})
@@ -413,9 +421,11 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera, running, statusDictionary, parentButtonDictionary):
+def startStream(camera, running, parentStatusDictionary, parentButtonDictionary):
 	global output
+	global statusDictionary 
 	global buttonDictionary
+	statusDictionary = parentStatusDictionary
 	buttonDictionary = parentButtonDictionary
 	camera.resolution = (1920, 1080)
 	camera.framerate = 30
@@ -438,7 +448,9 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 
 def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
 	global output
+	global statusDictionary 
 	global buttonDictionary
+	statusDictionary = parentStatusDictionary
 	buttonDictionary = parentButtonDictionary
 	camera.resolution = (1920, 1080)
 	camera.framerate = 30
