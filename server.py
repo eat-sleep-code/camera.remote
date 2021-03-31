@@ -6,6 +6,7 @@ from picamera import PiCamera
 from threading import Condition
 from http import server
 
+global buttonDictionary
 
 PAGE="""\
 <!DOCTYPE html>
@@ -116,8 +117,10 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera, running, statusDictionary, buttonDictionary):
+def startStream(camera, running, statusDictionary, parentButtonDictionary):
 	global output
+	global buttonDictionary
+	buttonDictionary = parentButtonDictionary
 	print(buttonDictionary['capture'])
 	camera.resolution = (960, 540)
 	#camera.framerate = 24
