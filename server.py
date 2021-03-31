@@ -281,10 +281,8 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 					self.end_headers()
 					self.wfile.write(frame)
 					self.wfile.write(b'\r\n')
-			except Exception as e:
-				logging.warning(
-					'Removed streaming client %s: %s',
-					self.client_address, str(e))
+			except Exception as ex:
+				pass
 		elif self.path.startswith('/control/'):
 			if self.path == '/control/capture/photo':	
 				buttonDictionary.update({'capture': True})
