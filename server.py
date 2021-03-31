@@ -424,8 +424,10 @@ def pauseStream(camera):
 		try:
 			camera.stop_recording()
 			console.log("Stream Paused")
-		finally:
-			camera.resolution =  camera.MAX_RESOLUTION
+		except Exception as ex:
+			print(str(ex))
+			pass
+			
 
 
 
