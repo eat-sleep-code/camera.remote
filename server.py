@@ -41,6 +41,13 @@ PAGE="""\
 			width: 100vw; 
 		}
 
+		.wrapper > div 
+		{
+			width: 100%;
+			display: flex;
+			justify-content: center;
+		}
+
 		.stream
 		{
 			border-radius: 4px;
@@ -242,6 +249,9 @@ class StreamingOutput(object):
 
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
+	def log_message(self, format, *args):
+		pass:
+			
 	def do_GET(self):
 		global output
 		global buttonDictionary
@@ -389,6 +399,7 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 			address = ('', 80)
 			server = StreamingServer(address, StreamingHandler)
 			server.logging = False
+			server.
 			server.serve_forever()
 		finally:
 			camera.stop_recording()
