@@ -47,15 +47,25 @@ PAGE="""\
 		.controls
 		{
 			display: flex;
-			width: 100%; 
 		}
 
-		.controls label 
+		.control-group
 		{
+			margin: 0 8px;
+		}
+
+		.control-group label 
+		{
+			align-items: center;
 			font-size: 12px;
-			display: inline-block;
-			width: 90px;
+			display: flex;
+			justify-content: center;
+			line-height: 12px;
+			height: 24px;
 			padding: 6px;
+			text-align: center;
+			width: 90px;
+			
 		}
 
 		.control-button
@@ -66,7 +76,7 @@ PAGE="""\
 			display: inline-block;
 			font-size: 36px;
 			height: 42px;
-			margin: 4px;
+			margin: 3px;
 			text-align: center;
 			text-decoration: none;
 			width: 42px;
@@ -90,8 +100,8 @@ PAGE="""\
 			<div class="control-group">
 				<label>Capture</label>
 				<div>
-					<a href="/capture/photo" class="control-button">Photo</a>
-					<a href="/capture/video" class="control-button">Video</a>
+					<a href="/capture/photo" class="control-button">&#10030;</a>
+					<a href="/capture/video" class="control-button">&#9679</a>
 				</div>
 			</div>
 			<div class="control-group">
