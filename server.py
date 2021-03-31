@@ -347,7 +347,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 				pass
 		elif self.path == '/status':
 			content = statusDictionary['message']
-			if len(content) = 0:
+			if len(content) == 0:
 				content = "Ready"
 			contentEncoded = content.encode('utf-8')
 			self.send_response(200)
