@@ -82,9 +82,24 @@ PAGE="""\
 			width: 42px;
 		}
 
+		.control-button.white
+		{
+			color: rgba(255, 255, 255, 1.0);
+		}
+
+		.control-button.white.dim
+		{
+			color: rgba(255, 255, 255, 0.5);
+		}
+
 		.control-button.red
 		{
 			color: rgba(255, 0, 0, 1.0);
+		}
+
+		.control-button.red.dim
+		{
+			color: rgba(255, 0, 0, 0.5);
 		}
 
 		.control-button.green
@@ -92,7 +107,17 @@ PAGE="""\
 			color: rgba(0, 255, 0, 1.0);
 		}
 
+		.control-button.green.dim
+		{
+			color: rgba(0, 255, 0, 0.5);
+		}
+
 		.control-button.blue
+		{
+			color: rgba(0, 0, 255, 1.0);
+		}
+
+		.control-button.blue.dim
 		{
 			color: rgba(0, 0, 255, 1.0);
 		}
@@ -116,7 +141,7 @@ PAGE="""\
 				<label>Capture</label>
 				<div>
 					<a href="/capture/photo" class="control-button">&#10030;</a>
-					<a href="/capture/video" class="control-button">&#9679</a>
+					<a href="/capture/video" class="control-button red">&#9679</a>
 				</div>
 			</div>
 			<div class="control-group">
@@ -147,18 +172,31 @@ PAGE="""\
 					<a href="/bracket/down" class="control-button">&#8854;</a>
 				</div>
 			</div>
-			<br />
+		</div>
+		<div class="controls">
+			<label>Lighting</label>
 			<div class="control-group">
-				<label>Lighting</label>
 				<div>
-					<a href="/light/white/up" class="control-button">&#9728;</a>
-					<a href="/light/white/down" class="control-button">&#9788;</a>
+					<a href="/light/white/up" class="control-button white">&#9728;</a>
+					<a href="/light/white/down" class="control-button white dim">&#9728;</a>	
+				</div>
+			</div>
+			<div class="control-group">
+				<div>
 					<a href="/light/red/up" class="control-button red">&#9728;</a>
-					<a href="/light/red/down" class="control-button red">&#9788;</a>
+					<a href="/light/red/down" class="control-button red dim">&#9728;</a>
+				</div>
+			</div>
+			<div class="control-group">
+				<div>
 					<a href="/light/green/up" class="control-button green">&#9728;</a>
-					<a href="/light/green/down" class="control-button green">&#9788;</a>
+					<a href="/light/green/down" class="control-button green dim">&#9728;</a>
+				</div>
+			</div>
+			<div class="control-group">
+				<div>
 					<a href="/light/blue/up" class="control-button blue">&#9728;</a>
-					<a href="/light/blue/down" class="control-button blue">&#9788;</a>
+					<a href="/light/blue/down" class="control-button blue dim">&#9728;</a>
 				</div>
 			</div>
 		</div>
