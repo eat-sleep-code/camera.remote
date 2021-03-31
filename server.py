@@ -392,7 +392,7 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 			camera.stop_recording()
 			print('\n Stream ended \n')
 
-def stopStream():
+def stopStream(camera):
 	with camera:
 		camera.stop_recording()
 		camera.resolution =  camera.MAX_RESOLUTION
