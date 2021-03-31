@@ -428,9 +428,10 @@ try:
 						statusDictionary.update({'action': ''})
 						camera.stop_recording()
 						camera.resolution = camera.MAX_RESOLUTION
-						print(' Capture complete \n')
 						statusDictionary.update({'message': ' Recording: Stopped '})
 						buttonDictionary.update({'captureVideo': False})
+						print(' Capture complete \n')
+						
 						if (camera.recording == False):
 							print('Resuming...')
 							server.resumeStream(camera, running, statusDictionary, buttonDictionary)
