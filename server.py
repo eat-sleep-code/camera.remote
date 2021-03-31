@@ -2,6 +2,7 @@ import io
 import logging
 import socketserver
 import subprocess
+from light import Light
 from picamera import PiCamera
 from threading import Condition
 from http import server
@@ -148,36 +149,36 @@ PAGE="""\
 			<div class="control-group">
 				<label>Capture</label>
 				<div>
-					<a href="/capture/photo" class="control-button">&#10030;</a>
-					<a href="/capture/video" class="control-button red">&#9679</a>
+					<a href="/control/capture/photo" class="control-button">&#10030;</a>
+					<a href="/control/capture/video" class="control-button red">&#9679</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Shutter Speed</label>
 				<div>
-					<a href="/shutter/up" class="control-button">&#8853;</a>
-					<a href="/shutter/down" class="control-button">&#8854;</a>
+					<a href="/control/shutter/up" class="control-button">&#8853;</a>
+					<a href="/control/shutter/down" class="control-button">&#8854;</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>ISO</label>
 				<div>
-					<a href="/iso/up" class="control-button">&#8853;</a>
-					<a href="/iso/down" class="control-button">&#8854;</a>
+					<a href="/control/iso/up" class="control-button">&#8853;</a>
+					<a href="/control/iso/down" class="control-button">&#8854;</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Exposure Compensation</label>
 				<div>
-					<a href="/ev/up" class="control-button">&#8853;</a>
-					<a href="/ev/down" class="control-button">&#8854;</a>
+					<a href="/control/ev/up" class="control-button">&#8853;</a>
+					<a href="/control/ev/down" class="control-button">&#8854;</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Bracketing</label>
 				<div>
-					<a href="/bracket/up" class="control-button">&#8853;</a>
-					<a href="/bracket/down" class="control-button">&#8854;</a>
+					<a href="/control/bracket/up" class="control-button">&#8853;</a>
+					<a href="/control/bracket/down" class="control-button">&#8854;</a>
 				</div>
 			</div>
 		</div>
@@ -185,26 +186,26 @@ PAGE="""\
 			<label>Lighting</label>
 			<div class="control-group">
 				<div>
-					<a href="/light/white/up" class="control-button white">&#9728;</a>
-					<a href="/light/white/down" class="control-button white dim">&#9728;</a>	
+					<a href="/control/light/white/up" class="control-button white">&#9728;</a>
+					<a href="/control/light/white/down" class="control-button white dim">&#9728;</a>	
 				</div>
 			</div>
 			<div class="control-group">
 				<div>
-					<a href="/light/red/up" class="control-button red">&#9728;</a>
-					<a href="/light/red/down" class="control-button red dim">&#9728;</a>
+					<a href="/control/light/red/up" class="control-button red">&#9728;</a>
+					<a href="/control/light/red/down" class="control-button red dim">&#9728;</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<div>
-					<a href="/light/green/up" class="control-button green">&#9728;</a>
-					<a href="/light/green/down" class="control-button green dim">&#9728;</a>
+					<a href="/control/light/green/up" class="control-button green">&#9728;</a>
+					<a href="/control/light/green/down" class="control-button green dim">&#9728;</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<div>
-					<a href="/light/blue/up" class="control-button blue">&#9728;</a>
-					<a href="/light/blue/down" class="control-button blue dim">&#9728;</a>
+					<a href="/control/light/blue/up" class="control-button blue">&#9728;</a>
+					<a href="/control/light/blue/down" class="control-button blue dim">&#9728;</a>
 				</div>
 			</div>
 		</div>
@@ -273,9 +274,90 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 				logging.warning(
 					'Removed streaming client %s: %s',
 					self.client_address, str(e))
-		elif self.path == '/capture/photo':	
-			buttonDictionary.update({'capture': True})
-			print('click')
+		elif self.path.startswith('/control/'):
+			if self.path == '/control/capture/photo':	
+				buttonDictionary.update({'capture': True})
+
+			elif self.path == '/control/capture/video':	
+				buttonDictionary.update({'capture': True})
+
+			elif self.path == '/control/shutter/up':	
+				buttonDictionary.update({'shutterUp': True})
+
+			elif self.path == '/control/shutter/down':	
+				buttonDictionary.update({'shutterDown': True})
+
+			elif self.path == '/control/iso/up':	
+				buttonDictionary.update({'isoUp': True})
+
+			elif self.path == '/control/iso/down':	
+				buttonDictionary.update({'isoDown': True})
+
+			elif self.path == '/control/ev/up':	
+				buttonDictionary.update({'evUp': True})
+
+			elif self.path == '/control/ev/down':	
+				buttonDictionary.update({'evDown': True})
+
+			elif self.path == '/control/bracket/up':	
+				buttonDictionary.update({'bracketUp': True})
+
+			elif self.path == '/control/bracket/down':	
+				buttonDictionary.update({'bracketDown': True})
+
+			elif self.path == '/control/light/white/up':	
+				if buttonDictionary['lightW'] < 255:
+					buttonDictionary.update({'lightW': buttonDictionary['lightW'] + 1})
+				else: 
+					buttonDictionary.update({'lightW': 0})
+
+			elif self.path == '/control/light/white/down':	
+				if buttonDictionary['lightW'] > 0:
+					buttonDictionary.update({'lightW': buttonDictionary['lightW'] - 1})
+				else: 
+					buttonDictionary.update({'lightW': 255})
+
+			elif self.path == '/control/light/red/up':	
+				if buttonDictionary['lightR'] < 255:
+					buttonDictionary.update({'lightR': buttonDictionary['lightR'] + 1})
+				else: 
+					buttonDictionary.update({'lightR': 0})
+
+			elif self.path == '/control/light/red/down':	
+				if buttonDictionary['lightR'] > 0:
+					buttonDictionary.update({'lightR': buttonDictionary['lightR'] - 1})
+				else: 
+					buttonDictionary.update({'lightR': 255})
+
+			elif self.path == '/control/light/green/up':	
+				if buttonDictionary['lightG'] < 255:
+					buttonDictionary.update({'lightG': buttonDictionary['lightG'] + 1})
+				else: 
+					buttonDictionary.update({'lightG': 0})
+
+			elif self.path == '/control/light/green/down':	
+				if buttonDictionary['lightG'] > 0:
+					buttonDictionary.update({'lightG': buttonDictionary['lightG'] - 1})
+				else: 
+					buttonDictionary.update({'lightG': 255})
+
+			elif self.path == '/control/light/blue/up':	
+				if buttonDictionary['lightB'] < 255:
+					buttonDictionary.update({'lightB': buttonDictionary['lightB'] + 1})
+				else: 
+					buttonDictionary.update({'lightB': 0})
+
+			elif self.path == '/control/light/blue/down':	
+				if buttonDictionary['lightB'] > 0:
+					buttonDictionary.update({'lightB': buttonDictionary['lightB'] - 1})
+				else: 
+					buttonDictionary.update({'lightB': 255})
+
+			Light.updateLight(buttonDictionary)
+			self.send_response(200)
+			self.send_header('Content-Type', 'text/html')
+			self.send_header('Content-Length', 0)
+			self.end_headers()
 		elif self.path == '/favicon.ico':
 			self.send_response(200)
 			self.send_header('Content-Type', 'image/x-icon')
