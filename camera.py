@@ -434,13 +434,16 @@ try:
 
 				# Shutter Speed	
 				elif buttonDictionary['shutterUp'] == True:
+					stopStream(camera)
 					if shutter == 0:
 						shutter = shutterShort
 					if shutter > shutterShort and shutter <= shutterLong:					
 						shutter = int(shutter / 1.5)
 					setShutter(shutter, 0.25)
 					buttonDictionary.update({'shutterUp': False})
+					def startStream(camera, running, statusDictionary, buttonDictionary):
 				elif buttonDictionary['shutterDown'] == True:
+					stopStream(camera)
 					if shutter == 0:						
 						shutter = shutterLong
 					elif shutter < shutterLong and shutter >= shutterShort:					
@@ -449,7 +452,7 @@ try:
 						shutter = 0
 					setShutter(shutter, 0.25)
 					buttonDictionary.update({'shutterDown': False})
-
+					def startStream(camera, running, statusDictionary, buttonDictionary):
 				# ISO
 				elif buttonDictionary['isoUp'] == True:
 					if iso == 0:
