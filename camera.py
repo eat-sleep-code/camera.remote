@@ -124,7 +124,7 @@ def setShutter(input, wait = 0):
 		time.sleep(wait)
 		return
 	except Exception as ex:
-		print(' WARNING: Invalid Shutter Speed! ' + str(shutter) + '\n ' + ex)
+		print(' WARNING: Invalid Shutter Speed! ' + str(shutter) + '\n ' + str(ex))
 
 # ------------------------------------------------------------------------------				
 
