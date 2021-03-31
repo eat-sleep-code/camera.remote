@@ -250,8 +250,8 @@ PAGE="""\
 					xhr.open('GET', url);
 					xhr.send();
 					status = xhr.reponse;
-					if (status !== lastStatus) {
-						status = lastStatus;
+					if (status !== lastStatus && status !== '') {
+						lastStatus = status;
 						document.getElementsByClassName('status')[0].innerHTML = status;
 					}
 					await sleep(1000);
