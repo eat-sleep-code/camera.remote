@@ -43,8 +43,9 @@ PAGE="""\
 
 		.stream
 		{
+			border-radius: 4px;
 			max-width: 960px;
-			style="width: 100%; 
+			width: 100%; 
 		}
 
 		.controls
