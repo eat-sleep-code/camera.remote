@@ -242,7 +242,7 @@ PAGE="""\
 		}
 
 		async function monitorStatus() {
-			time.sleep(2000)
+			sleep(2000)
 			try {
 				let lastStatus = '';
 				while (true) {
