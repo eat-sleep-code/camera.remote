@@ -416,14 +416,14 @@ def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
 	with camera:
 		output = StreamingOutput()
 		camera.start_recording(output, format='mjpeg')
-		console.log("Stream Resumed")
+		print("Stream Resumed")
 
 
 def pauseStream(camera):
 	with camera:
 		try:
 			camera.stop_recording()
-			console.log("Stream Paused")
+			print("Stream Paused")
 		except Exception as ex:
 			print(str(ex))
 			pass
