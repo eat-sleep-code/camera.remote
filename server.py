@@ -69,6 +69,7 @@ class StreamingOutput(object):
 class StreamingHandler(server.BaseHTTPRequestHandler):
 	def do_GET(self):
 		global output
+		global buttonDictionary
 		if self.path == '/':
 			content = PAGE.encode('utf-8')
 			self.send_response(200)
@@ -117,6 +118,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 def startStream(camera, running, statusDictionary, buttonDictionary):
 	global output
+	global buttonDictionary
 	camera.resolution = (960, 540)
 	#camera.framerate = 24
 	with camera:
