@@ -372,6 +372,11 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			self.send_header('Content-Type', 'image/x-icon')
 			self.send_header('Content-Length', 0)
 			self.end_headers()
+		elif self.path == '/blank.jpg':
+			self.send_response(200)
+			self.send_header('Content-Type', 'image/jpeg')
+			self.send_header('Content-Length', 0)
+			self.end_headers()
 		else:
 			self.send_error(404)
 			self.end_headers()
@@ -412,7 +417,6 @@ def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
 	camera.resolution = (1920, 1080)
 	camera.framerate = 30
 	output = StreamingOutput()
-	output.file='stream.mjpeg#1'
 	camera.start_recording(output, format='mjpeg')
 	print(" Resuming preview... ")
 
