@@ -62,6 +62,7 @@ PAGE="""\
 		{
 			border: solid 1px rgba(255, 255, 255, 1.0);
 			border-radius: 4px;
+			color: rgba(255, 255, 255, 1.0);
 			display: inline-block;
 			font-size: 36px;
 			height: 42px;
@@ -86,30 +87,40 @@ PAGE="""\
 			<img src="stream.mjpg" class="stream" />
 		</div>
 		<div class="controls">
-			<div>
+			<div class="control-group">
 				<label>Capture</label>
-				<a href="/capture/photo" class="control-button">Photo</a>
-				<a href="/capture/video" class="control-button">Video</a>
+				<div>
+					<a href="/capture/photo" class="control-button">Photo</a>
+					<a href="/capture/video" class="control-button">Video</a>
+				</div>
 			</div>
-			<div>
+			<div class="control-group">
 				<label>Shutter Speed</label>
-				<a href="/shutter/up" class="control-button">&#8853;</a>
-				<a href="/shutter/down" class="control-button">&#8854;</a>
+				<div>
+					<a href="/shutter/up" class="control-button">&#8853;</a>
+					<a href="/shutter/down" class="control-button">&#8854;</a>
+				</div>
 			</div>
-			<div>
+			<div class="control-group">
 				<label>ISO</label>
-				<a href="/iso/up" class="control-button">&#8853;</a>
-				<a href="/iso/down" class="control-button">&#8854;</a>
+				<div>
+					<a href="/iso/up" class="control-button">&#8853;</a>
+					<a href="/iso/down" class="control-button">&#8854;</a>
+				</div>
 			</div>
-			<div>
+			<div class="control-group">
 				<label>Exposure Compensation</label>
-				<a href="/ev/up" class="control-button">&#8853;</a>
-				<a href="/ev/down" class="control-button">&#8854;</a>
+				<div>
+					<a href="/ev/up" class="control-button">&#8853;</a>
+					<a href="/ev/down" class="control-button">&#8854;</a>
+				</div>
 			</div>
-			<div>
+			<div class="control-group">
 				<label>Bracketing</label>
-				<a href="/bracket/up" class="control-button">&#8853;</a>
-				<a href="/bracket/down" class="control-button">&#8854;</a>
+				<div>
+					<a href="/bracket/up" class="control-button">&#8853;</a>
+					<a href="/bracket/down" class="control-button">&#8854;</a>
+				</div>
 			</div>
 		</div>
 	</div>
