@@ -23,8 +23,27 @@ PAGE="""\
 		<div>
 			<img src="stream.mjpg" style="width: 100%; max-width: 960px;" />
 		</div>
-		<div>
-			<a href="/capture/photo">Capture</a>
+		<div style="width: 100%; display: flex;">
+			<div>
+				<a href="/capture/photo">Photo</a>
+				<a href="/capture/video">Video</a>
+			</div>
+			<div>
+				<a href="/shutter/up">&#8853;</a>
+				<a href="/shutter/down">&#8854;</a>
+			</div>
+			<div>
+				<a href="/iso/up">&#8853;</a>
+				<a href="/iso/down">&#8854;</a>
+			</div>
+			<div>
+				<a href="/ev/up">&#8853;</a>
+				<a href="/ev/down">&#8854;</a>
+			</div>
+			<div>
+				<a href="/bracket/up">&#8853;</a>
+				<a href="/bracket/down">&#8854;</a>
+			</div>
 		</div>
 	</div>
 </body>
@@ -71,7 +90,6 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 						frame = output.frame
 					self.wfile.write(b'--FRAME\r\n')
 					self.send_header('Content-Type', 'image/jpeg')
-					print(len(frame))
 					self.send_header('Content-Length', len(frame))
 					self.end_headers()
 					self.wfile.write(frame)
@@ -107,13 +125,13 @@ def startStream(camera, running, statusDictionary, buttonDictionary):
 		hostname = subprocess.getoutput('hostname -I')
 		url = 'http://' + str(hostname)
 		print('\n Stream started: ' + url + '\n')
-		#try:
-		address = ('', 80)
-		server = StreamingServer(address, StreamingHandler)
-		server.serve_forever()
-		#finally:
-		#	camera.stop_recording()
-		#	print('\n Stream ended \n')
+		try:
+			address = ('', 80)
+			server = StreamingServer(address, StreamingHandler)
+			server.serve_forever()
+		finally:
+			camera.stop_recording()
+			print('\n Stream ended \n')
 
 def stopStream():
 	with camera:
