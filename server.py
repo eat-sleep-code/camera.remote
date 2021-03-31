@@ -116,7 +116,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera, running, statusDictionary, buttonDictionary):
+def startStream(camera):
 	global output
 	global buttonDictionary
 	camera.resolution = (960, 540)
