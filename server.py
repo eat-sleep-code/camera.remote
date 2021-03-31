@@ -314,11 +314,6 @@ PAGE="""\
 			xhr.send();
 			event.preventDefault();
 			cycleImage();
-			
-			/* Toggle blink on record button */
-			if (url == '/control/capture/video') {
-				console.log('was here')
-			}
 		}));
 
 		
