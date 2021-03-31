@@ -230,7 +230,7 @@ PAGE="""\
 			await sleep(1000);
 			document.getElementsByClassName('stream')[0].src="stream.mjpg";
 		}
-		
+
 		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
 			var url = event.target.href;
@@ -275,7 +275,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			self.send_header('Content-Length', len(content))
 			self.end_headers()
 			self.wfile.write(content)
-		elif self.path == '/stream.mjpg':
+		elif self.path == '/stream.mjpg' or self.path == '/blank.jpg':
 			self.send_response(200)
 			self.send_header('Age', 0)
 			self.send_header('Cache-Control', 'no-cache, private')
@@ -382,11 +382,6 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 		elif self.path == '/favicon.ico':
 			self.send_response(200)
 			self.send_header('Content-Type', 'image/x-icon')
-			self.send_header('Content-Length', 0)
-			self.end_headers()
-		elif self.path == '/blank.jpg':
-			self.send_response(200)
-			self.send_header('Content-Type', 'image/jpeg')
 			self.send_header('Content-Length', 0)
 			self.end_headers()
 		else:
