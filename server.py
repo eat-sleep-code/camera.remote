@@ -412,14 +412,15 @@ def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
 	camera.resolution = (1920, 1080)
 	camera.framerate = 30
 	output = StreamingOutput()
+	print(output)
 	camera.start_recording(output, format='mjpeg')
-	print("Stream Resumed")
+	print(" Resuming preview... ")
 
 
 def pauseStream(camera):
 	try:
 		camera.stop_recording()
-		print("Stream Paused")
+		print(" Pausing preview... ")
 	except Exception as ex:
 		print(str(ex))
 		pass
