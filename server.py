@@ -244,13 +244,13 @@ PAGE="""\
 		async function monitorStatus() {
 			sleep(2000)
 			try {
-				let lastStatus = '';
+				var lastStatus = '';
 				while (true) {
-					let url = '/status';
-					let xhr = new XMLHttpRequest();
+					var url = '/status';
+					var xhr = new XMLHttpRequest();
 					xhr.open('GET', url);
 					xhr.send();
-					let status = xhr.reponse.toString();
+					var status = xhr.reponse.toString();
 					if (status !== lastStatus && status !== 'Ready') {
 						lastStatus = status;
 						document.getElementsByClassName('status')[0].innerHTML = status;
@@ -279,10 +279,10 @@ PAGE="""\
 			}
 		}
 
-		let controls = document.querySelectorAll('.control-button');
+		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
-			let url = event.target.href;
-			let xhr = new XMLHttpRequest();
+			var url = event.target.href;
+			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
 			event.preventDefault();
