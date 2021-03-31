@@ -49,21 +49,11 @@ PAGE="""\
 			justify-content: center;
 		}
 
-		.stream-wrapper 
-		{
-			height: auto;
-			overflow: hidden;
-			padding-bottom: 56.25%;
-			width: 100%;	
-		}
-
 		.stream
 		{
 			border-radius: 4px;
 			max-width: 960px;
 			width: 100%; 
-			position: absolute !important;
-			top: 0;
 		}
 
 		.controls
@@ -162,9 +152,7 @@ PAGE="""\
 <body>
 	<div class="wrapper">
 		<div>
-			<div class="stream-wrapper">
-				<img src="stream.mjpg" class="stream" />
-			</div>
+			<img src="stream.mjpg" class="stream" />
 		</div>
 		<div class="controls">
 			<div class="control-group">
@@ -237,10 +225,11 @@ PAGE="""\
 		}
 
 		async function cycleImage() {
+			document.getElementsByClassName('stream')[0].style.height = Math.round((document.getElementsByClassName('stream')[0].style.width * 100) / 56.25) + 'px';
 			await sleep(1000);
-			document.getElementsByClassName('stream')[0].src="blank.jpg";
+			document.getElementsByClassName('stream')[0].src='blank.jpg';
 			await sleep(1000);
-			document.getElementsByClassName('stream')[0].src="stream.mjpg";
+			document.getElementsByClassName('stream')[0].src='stream.mjpg';
 		}
 
 		var controls = document.querySelectorAll('.control-button');
