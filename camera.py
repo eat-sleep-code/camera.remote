@@ -99,13 +99,13 @@ def setShutter(input, wait = 0):
 			shutter = shutterShort
 		elif shutter > shutterLong:
 			shutter = shutterLong 
-	try:
-		if camera.framerate == defaultFramerate and shutter > shutterLongThreshold:
-			camera.framerate=fractions.Fraction(5, 1000)
-		elif camera.framerate != defaultFramerate and shutter <= shutterLongThreshold:
-			camera.framerate = defaultFramerate
-	except Exception as ex:
-		print( ' WARNING: Could not set framerate! ')
+	#try:
+	#	if camera.framerate == defaultFramerate and shutter > shutterLongThreshold:
+	#		camera.framerate=fractions.Fraction(5, 1000)
+	#	elif camera.framerate != defaultFramerate and shutter <= shutterLongThreshold:
+	#		camera.framerate = defaultFramerate
+	#except Exception as ex:
+	#	print( ' WARNING: Could not set framerate! ')
 
 	try:
 		if shutter == 0:
@@ -447,7 +447,8 @@ try:
 					elif shutter == shutterShort:
 						shutter = 0
 					setShutter(shutter, 0.25)
-					server.startStream(camera, running, statusDictionary, buttonDictionary)
+					buttonDictionary.update({'shutterDown': False})
+					
 				# ISO
 				elif buttonDictionary['isoUp'] == True:
 					if iso == 0:
