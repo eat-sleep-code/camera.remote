@@ -19,6 +19,7 @@ camera = PiCamera()
 PiCamera.CAPTURE_TIMEOUT = 1500
 camera.resolution = camera.MAX_RESOLUTION
 camera.sensor_mode = 3
+camera.framerate = 30
 
 dng = RPICAM2DNG()
 running = False
@@ -408,6 +409,7 @@ try:
 
 					# Video
 					if isRecording == False:
+						server.stopStream();		
 						isRecording = True
 						statusDictionary.update({'action': 'recording'})
 						filepath = getFilePath(True, True)
@@ -424,7 +426,8 @@ try:
 						print(' Capture complete \n')
 						statusDictionary.update({'message': ' Recording: Stopped '})
 						buttonDictionary.update({'captureVideo': False})
-					
+						server.startStream(camera, running, statusDictionary, buttonDictionary)
+						
 					time.sleep(1)
 
 				# Shutter Speed	
