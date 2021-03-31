@@ -250,7 +250,7 @@ PAGE="""\
 					xhr.open('GET', url);
 					xhr.send();
 					let status = xhr.reponse;
-					if (status !== lastStatus && status !== '') {
+					if (status !== lastStatus && status !== 'Ready') {
 						lastStatus = status;
 						document.getElementsByClassName('status')[0].innerHTML = status;
 					}
@@ -319,12 +319,12 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 		global statusDictionary
 		global buttonDictionary
 		if self.path == '/':
-			content = PAGE.encode('utf-8')
+			contentEncoded = PAGE.encode('utf-8')
 			self.send_response(200)
 			self.send_header('Content-Type', 'text/html')
-			self.send_header('Content-Length', len(content))
+			self.send_header('Content-Length', len(contentEncoded))
 			self.end_headers()
-			self.wfile.write(content)
+			self.wfile.write(contentEncoded)
 		elif self.path == '/stream.mjpg' or self.path == '/blank.jpg':
 			self.send_response(200)
 			self.send_header('Age', 0)
@@ -346,12 +346,15 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			except Exception as ex:
 				pass
 		elif self.path == '/status':
-			content = statusDictionary['message'].encode('utf-8')
+			content = statusDictionary['message']
+			if len(content) = 0:
+				content = "Ready"
+			contentEncoded = content.encode('utf-8')
 			self.send_response(200)
 			self.send_header('Content-Type', 'text/html')
-			self.send_header('Content-Length', len(content))
+			self.send_header('Content-Length', len(contentEncoded))
 			self.end_headers()
-			self.wfile.write(content)
+			self.wfile.write(contentEncoded)
 		elif self.path.startswith('/control/'):
 			if self.path == '/control/capture/photo':	
 				buttonDictionary.update({'capture': True})
