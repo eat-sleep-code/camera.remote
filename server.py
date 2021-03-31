@@ -390,21 +390,21 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 	buttonDictionary = parentButtonDictionary
 	camera.resolution = (1920, 1080)
 	camera.framerate = 30
-	with camera:
-		output = StreamingOutput()
-		camera.start_recording(output, format='mjpeg')
-		hostname = subprocess.getoutput('hostname -I')
-		url = 'http://' + str(hostname)
-		print('\n Remote Interface: ' + url + '\n')
-		try:
-			address = ('', 80)
-			server = StreamingServer(address, StreamingHandler)
-			server.allow_reuse_address = True
-			server.logging = False
-			server.serve_forever()
-		finally:
-			camera.stop_recording()
-			print('\n Stream ended \n')
+
+	output = StreamingOutput()
+	camera.start_recording(output, format='mjpeg')
+	hostname = subprocess.getoutput('hostname -I')
+	url = 'http://' + str(hostname)
+	print('\n Remote Interface: ' + url + '\n')
+	try:
+		address = ('', 80)
+		server = StreamingServer(address, StreamingHandler)
+		server.allow_reuse_address = True
+		server.logging = False
+		server.serve_forever()
+	finally:
+		camera.stop_recording()
+		print('\n Stream ended \n')
 
 
 def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
@@ -413,20 +413,18 @@ def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
 	buttonDictionary = parentButtonDictionary
 	camera.resolution = (1920, 1080)
 	camera.framerate = 30
-	with camera:
-		output = StreamingOutput()
-		camera.start_recording(output, format='mjpeg')
-		print("Stream Resumed")
+	output = StreamingOutput()
+	camera.start_recording(output, format='mjpeg')
+	print("Stream Resumed")
 
 
 def pauseStream(camera):
-	with camera:
-		try:
-			camera.stop_recording()
-			print("Stream Paused")
-		except Exception as ex:
-			print(str(ex))
-			pass
+	try:
+		camera.stop_recording()
+		print("Stream Paused")
+	except Exception as ex:
+		print(str(ex))
+		pass
 			
 
 
