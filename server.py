@@ -138,15 +138,6 @@ PAGE="""\
 			color: rgba(0, 0, 255, 0.5);
 		}
 	</style>
-	<script>
-		var controls = document.querySelectorAll('.control-button');
-		controls.forEach(element => console.log(element));
-		controls.forEach(element => element.addEventListener('click', event => {
-			var url = event.target.href;
-			console.log(url);
-			event.preventDefault();
-		}));
-	</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -218,6 +209,15 @@ PAGE="""\
 			</div>
 		</div>
 	</div>
+	<script>
+		var controls = document.querySelectorAll('.control-button');
+		controls.forEach(element => console.log(element));
+		controls.forEach(element => element.addEventListener('click', event => {
+			var url = event.target.href;
+			console.log(url);
+			event.preventDefault();
+		}));
+	</script>
 </body>
 </html>
 """
