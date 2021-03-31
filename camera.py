@@ -17,7 +17,9 @@ version = '2021.03.30'
 
 camera = PiCamera()
 PiCamera.CAPTURE_TIMEOUT = 1500
-#camera.resolution = camera.MAX_RESOLUTION
+camera.resolution = camera.MAX_RESOLUTION
+camera.sensor_mode = 3
+
 dng = RPICAM2DNG()
 running = False
 statusDictionary = {'message': '', 'action': '', 'colorR': 0, 'colorG': 0, 'colorB': 0, 'colorW': 0}
@@ -332,7 +334,7 @@ try:
 		
 
 		# print(str(camera.resolution))
-		#camera.sensor_mode = 3
+		
 
 		print('\n Camera ' + version )
 		print('\n ----------------------------------------------------------------------')

@@ -279,7 +279,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 				buttonDictionary.update({'capture': True})
 
 			elif self.path == '/control/capture/video':	
-				buttonDictionary.update({'capture': True})
+				buttonDictionary.update({'captureVideo': True})
 
 			elif self.path == '/control/shutter/up':	
 				buttonDictionary.update({'shutterUp': True})
@@ -376,7 +376,6 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 	global output
 	global buttonDictionary
 	buttonDictionary = parentButtonDictionary
-	print(buttonDictionary['capture'])
 	camera.resolution = (960, 540)
 	#camera.framerate = 24
 	with camera:
@@ -396,6 +395,7 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 def stopStream():
 	with camera:
 		camera.stop_recording()
+		camera.resolution =  camera.MAX_RESOLUTION
 
 
 
