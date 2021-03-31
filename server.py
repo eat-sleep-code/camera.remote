@@ -387,7 +387,7 @@ def startStream(camera, running, statusDictionary, parentButtonDictionary):
 	global output
 	global buttonDictionary
 	buttonDictionary = parentButtonDictionary
-	camera.resolution = (960, 540)
+	#camera.resolution = (960, 540)
 	#camera.framerate = 24
 	with camera:
 		output = StreamingOutput()
