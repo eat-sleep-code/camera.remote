@@ -242,27 +242,37 @@ PAGE="""\
 		}
 
 		async function monitorStatus() {
-			sleep(2000)
-			try {
-				var lastStatus = '';
-				while (true) {
-					var url = '/status';
-					var xhr = new XMLHttpRequest();
-					xhr.open('GET', url);
-					xhr.send();
-					var status = xhr.reponse.toString();
-					if (status !== lastStatus && status !== 'Ready') {
-						lastStatus = status;
-						document.getElementsByClassName('status')[0].innerHTML = status;
+			var lastStatus = '';
+			var url = '/status';
+			
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', url, true);
+
+			xhr.responseType = 'text';
+			xhr.onload = function() {
+				if (xhr.readyState === xhr.DONE) {
+					if (xhr.status === 200) {
+						status = xhr.responseText;
+						if (status !== lastStatus && status !== 'Ready') {
+							lastStatus = status;
+							document.getElementsByClassName('status')[0].innerHTML = status;
+						}
 					}
-					await sleep(1000);
 				}
-			}
-			catch(ex) {
-				console.warn('Could not update status', ex);
+			};
+			xhr.send(null);
+		}
+		try {
+			while (true) {
+				await monitorStatus();
+				await sleep(1000);
 			}
 		}
-		var currentStatus = monitorStatus();
+		catch(ex) {
+			console.warn('Could not update status', ex);
+		}
+		
+		
 
 		async function cycleImage() {
 			try {
@@ -278,6 +288,7 @@ PAGE="""\
 				console.warn('Could not cycle image', ex);
 			}
 		}
+
 
 		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
