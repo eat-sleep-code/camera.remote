@@ -161,8 +161,10 @@ PAGE="""\
 </head>
 <body>
 	<div class="wrapper">
-		<div class="stream-wrapper">
-			<img src="stream.mjpg" class="stream" />
+		<div>
+			<div class="stream-wrapper">
+				<img src="stream.mjpg" class="stream" />
+			</div>
 		</div>
 		<div class="controls">
 			<div class="control-group">
