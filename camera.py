@@ -441,7 +441,7 @@ try:
 						shutter = int(shutter / 1.5)
 					setShutter(shutter, 0.25)
 					buttonDictionary.update({'shutterUp': False})
-					server.startStream(camera, running, statusDictionary, buttonDictionary):
+					server.startStream(camera, running, statusDictionary, buttonDictionary)
 				elif buttonDictionary['shutterDown'] == True:
 					server.stopStream(camera)
 					if shutter == 0:						
@@ -452,7 +452,7 @@ try:
 						shutter = 0
 					setShutter(shutter, 0.25)
 					buttonDictionary.update({'shutterDown': False})
-					server.startStream(camera, running, statusDictionary, buttonDictionary):
+					server.startStream(camera, running, statusDictionary, buttonDictionary)
 				# ISO
 				elif buttonDictionary['isoUp'] == True:
 					if iso == 0:
