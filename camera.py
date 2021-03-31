@@ -331,7 +331,7 @@ try:
 		global isRecording
 		global statusDictionary
 		global buttonDictionary
-
+		global running
 		
 
 		# print(str(camera.resolution))
