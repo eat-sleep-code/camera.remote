@@ -21,6 +21,8 @@ PAGE="""\
 	<style>
 		body 
 		{
+			color: rgba(255, 255, 255, 1.0);
+			font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 			margin: 0; 
 			padding: 0;
 		}
@@ -48,14 +50,23 @@ PAGE="""\
 			width: 100%; 
 		}
 
+		.controls label 
+		{
+			font-size: 12px;
+			display: inline-block;
+			width: 90px;
+			padding: 6px;
+		}
+
 		.control-button
 		{
 			border: solid 1px rgba(255, 255, 255, 1.0);
 			border-radius: 4px;
-			color: rgba(255, 255, 255, 1.0);
 			display: inline-block;
-			font-size: 20px;
+			font-size: 36px;
 			height: 42px;
+			margin: 4px;
+			text-align: center;
 			text-decoration: none;
 			width: 42px;
 		}
@@ -76,22 +87,27 @@ PAGE="""\
 		</div>
 		<div class="controls">
 			<div>
+				<label>Capture</label>
 				<a href="/capture/photo" class="control-button">Photo</a>
 				<a href="/capture/video" class="control-button">Video</a>
 			</div>
 			<div>
+				<label>Shutter Speed</label>
 				<a href="/shutter/up" class="control-button">&#8853;</a>
 				<a href="/shutter/down" class="control-button">&#8854;</a>
 			</div>
 			<div>
+				<label>ISO</label>
 				<a href="/iso/up" class="control-button">&#8853;</a>
 				<a href="/iso/down" class="control-button">&#8854;</a>
 			</div>
 			<div>
+				<label>Exposure Compensation</label>
 				<a href="/ev/up" class="control-button">&#8853;</a>
 				<a href="/ev/down" class="control-button">&#8854;</a>
 			</div>
 			<div>
+				<label>Bracketing</label>
 				<a href="/bracket/up" class="control-button">&#8853;</a>
 				<a href="/bracket/down" class="control-button">&#8854;</a>
 			</div>
