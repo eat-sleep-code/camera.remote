@@ -60,6 +60,7 @@ PAGE="""\
 		.status 
 		{
 			background: rgba(0, 0, 0, 0.5);
+			border-radius: 4px;
 			box-sizing: border-box;
 			font-size: 12px;
 			height: 24px;
@@ -163,6 +164,18 @@ PAGE="""\
 		{
 			color: rgba(0, 0, 255, 0.5);
 		}
+
+		.control-button.blink span {
+			animation: blink 1s linear infinite;
+		}
+
+		@keyframes blink 
+		{
+			50% 
+			{
+				opacity: 0;
+			}
+		}
 	</style>
 </head>
 <body>
@@ -176,7 +189,7 @@ PAGE="""\
 				<label>Capture</label>
 				<div>
 					<a href="/control/capture/photo" class="control-button">&#10030;</a>
-					<a href="/control/capture/video" class="control-button red">&#9679</a>
+					<a href="/control/capture/video" class="control-button red"><span>&#9679</span></a>
 				</div>
 			</div>
 			<div class="control-group">
@@ -292,6 +305,10 @@ PAGE="""\
 			}
 		}
 
+		
+		function toggleBlink(element) {
+			if element.href
+		}
 
 		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
@@ -301,6 +318,16 @@ PAGE="""\
 			xhr.send();
 			event.preventDefault();
 			cycleImage();
+			
+			/* Toggle blink on record button */
+			if (url == '/control/capture/video') {
+				if element.classList.contains('blink') {
+					element.classList.remove('blink');
+				}
+				else {
+					element.classList.add('blink');
+				}
+			}
 		}));
 
 		
