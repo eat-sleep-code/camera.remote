@@ -249,7 +249,7 @@ PAGE="""\
 					let xhr = new XMLHttpRequest();
 					xhr.open('GET', url);
 					xhr.send();
-					status = xhr.reponse;
+					let status = xhr.reponse;
 					if (status !== lastStatus && status !== '') {
 						lastStatus = status;
 						document.getElementsByClassName('status')[0].innerHTML = status;
