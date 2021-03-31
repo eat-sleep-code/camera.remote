@@ -37,6 +37,7 @@ PAGE="""\
 			flex-wrap: wrap;
 			height: 100vh;
 			justify-content: center;
+			overflow-x: hidden;
 			padding-bottom: 60px; 
 			width: 100vw; 
 		}
@@ -415,12 +416,14 @@ def resumeStream(camera, running, statusDictionary, parentButtonDictionary):
 	with camera:
 		output = StreamingOutput()
 		camera.start_recording(output, format='mjpeg')
+		console.log("Stream Resumed")
 
 
-def stopStream(camera):
+def pauseStream(camera):
 	with camera:
 		try:
 			camera.stop_recording()
+			console.log("Stream Paused")
 		finally:
 			camera.resolution =  camera.MAX_RESOLUTION
 
