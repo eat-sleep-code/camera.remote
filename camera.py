@@ -419,6 +419,8 @@ try:
 						print(' Capturing video: ' + filepath + '\n')
 						statusDictionary.update({'message': ' Recording: Started '})
 						buttonDictionary.update({'captureVideo': False})
+						if (camera.recording == True):
+							camera.stop_recording()
 						camera.start_recording(filepath, quality=20)
 					else:
 						isRecording = False
@@ -428,6 +430,8 @@ try:
 						print(' Capture complete \n')
 						statusDictionary.update({'message': ' Recording: Stopped '})
 						buttonDictionary.update({'captureVideo': False})
+						if (camera.recording == False):
+							server.startStream(camera, running, statusDictionary, buttonDictionary)
 							
 					time.sleep(1)
 
@@ -448,7 +452,7 @@ try:
 						shutter = 0
 					setShutter(shutter, 0.25)
 					buttonDictionary.update({'shutterDown': False})
-					
+
 				# ISO
 				elif buttonDictionary['isoUp'] == True:
 					if iso == 0:
