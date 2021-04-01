@@ -22,7 +22,7 @@ The following attributes can be adjusted from the web interface:
      - Green (256 steps)
      - Blue (256 steps)
 
-:information_source: &nbsp; *The primary intended use of this application is for still photography / photogammetry.  Video preview is suspended during capture due to apparent hardware limitations.   This system can be used to capture video, but currently it is not user-friendly.*
+:information_source: &nbsp; *The primary intended use of this application is for still photography / photogammetry.  Preview is suspended during video capture due to apparent hardware limitations.   This system can be used to capture video, but it currently is not user-friendly.*
 
 ---
 ## Use With Other Camera Software
