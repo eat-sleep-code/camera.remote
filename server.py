@@ -316,7 +316,7 @@ PAGE="""\
 			/* Toggle blink on record button */
 			console.log(url)
 			if (url == '/control/capture/video') {
-				console.log(url, event, element);
+				console.log(url, event.target);
 				if (event.classList.contains('blink')) {
 					event.classList.remove('blink');
 				}
