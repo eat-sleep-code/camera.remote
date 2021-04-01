@@ -308,14 +308,16 @@ PAGE="""\
 
 		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
-			console.log('target', event.target);
-			var url = event.target.href;
+			var targetElement = event.target;
+			var url = targetElement.href;
+			console.log(url, targetElement, targetElement.classList)
+			
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
 
 			/* Toggle blink on record button */
-			if (url == '/control/capture/video') {
+			if (url.endsWith('/control/capture/video')) {
 				console.log(url, event.target);
 				if (event.classList.contains('blink')) {
 					event.classList.remove('blink');
@@ -330,6 +332,9 @@ PAGE="""\
 			
 			
 		}));
+
+		
+	</script>
 
 		
 	</script>
