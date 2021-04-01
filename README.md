@@ -7,20 +7,26 @@ Combining this program with a Raspberry Pi HQ camera, a Raspberry Pi Zero WH, an
 The following attributes can be adjusted from the web interface:
 
 1) Capture
-     * Still Photo
-     * Video*
+     - Still Photo
+     - Video*
 1) Shutter Speed
 1) ISO
 1) Exposure Compensation
 1) Bracketing
-1) Scene Lighting - Currently limited to a 16-LED NeoPixel.
-     * Red
-     * Green
-     * Blue
-     * White 
-   
+1) Scene Lighting - *currently limited to control of a 16-LED NeoPixel array*
+     - All Lights (on/off)
+     - Natural White (256 steps)
+     - Red (256 steps)
+     - Green (256 steps)
+     - Blue (256 steps)
 
-:information_source:  The primary purpose of this application is intended still photography / photogammetry.  Video preview is suspended during capture due to apparent hardware limitations.   This system can be used to capture video, but currently it is not user-friendly.  
+:information_source: &nbsp; *The primary intended use of this application is for still photography / photogammetry.  Video preview is suspended during capture due to apparent hardware limitations.   This system can be used to capture video, but currently it is not user-friendly.*
+
+**Optionally**, this application may be used in conjunction with one of the following applications.  These applications are all designed to kill the camera.remote script at startup (and vice versa) to eliminate hardware-in-use errors.
+   - [Camera](https://github.com/eat-sleep-code/camera)
+   - [Camera.Zero](https://github.com/eat-sleep-code/camera.zero)
+   - [Camera.Timelapse](https://github.com/eat-sleep-code/camera.timelapse)
+
 
 ---
 ## Getting Started
@@ -64,4 +70,4 @@ Also note, that while IR cameras utilize "invisible" (outside the spectrum of th
 
 ---
 
-:information_source: *This application was developed using a Raspberry Pi HQ (2020) camera and Raspberry Pi Zero WH and Raspberry Pi 4B boards.   Issues may arise if you are using either third party or older hardware.*
+:information_source:  &nbsp; *This application was developed using a Raspberry Pi HQ (2020) camera and Raspberry Pi Zero WH and Raspberry Pi 4B boards.   Issues may arise if you are using either third party or older hardware.*
