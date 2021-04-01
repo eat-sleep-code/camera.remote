@@ -262,8 +262,9 @@ PAGE="""\
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
 
+		var lastStatus = '';
+			
 		async function updateStatus() {
-			var lastStatus = '';
 			var url = '/status';
 			
 			var xhr = new XMLHttpRequest();
