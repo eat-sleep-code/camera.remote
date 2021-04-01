@@ -4,6 +4,8 @@ Combining this program with a Raspberry Pi HQ camera, a Raspberry Pi Zero WH, an
 
 ---
 
+## Web-Based Control
+
 The following attributes can be adjusted from the web interface:
 
 1) Capture
@@ -21,6 +23,9 @@ The following attributes can be adjusted from the web interface:
      - Blue (256 steps)
 
 :information_source: &nbsp; *The primary intended use of this application is for still photography / photogammetry.  Video preview is suspended during capture due to apparent hardware limitations.   This system can be used to capture video, but currently it is not user-friendly.*
+
+---
+## Use With Other Camera Software
 
 **Optionally**, this application may be used in conjunction with one of the following applications.  These applications are all designed to kill the camera.remote script at startup (and vice versa) to eliminate hardware-in-use errors.
    - [Camera](https://github.com/eat-sleep-code/camera)
