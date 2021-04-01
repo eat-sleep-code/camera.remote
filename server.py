@@ -165,7 +165,7 @@ PAGE="""\
 			color: rgba(0, 0, 255, 0.5);
 		}
 
-		.control-button.blink span {
+		.control-button.blink {
 			animation: blink 1s linear infinite;
 		}
 
