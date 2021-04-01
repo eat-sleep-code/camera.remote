@@ -430,7 +430,6 @@ try:
 						statusDictionary.update({'message': ' Recording: Stopped '})
 						buttonDictionary.update({'captureVideo': False})
 						print(' Capture complete \n')
-						
 						if (camera.recording == False):
 							server.resumeStream(camera, running, statusDictionary, buttonDictionary)
 							
@@ -483,6 +482,7 @@ try:
 						ev = int(ev - 1)
 						setEV(ev, 0.25)
 						buttonDictionary.update({'evDown': False})
+
 				# Exposure Bracketing
 				elif buttonDictionary['bracketUp'] == True:
 					if bracket < evMax:
@@ -494,6 +494,7 @@ try:
 						bracket = int(bracket - 1)
 						setBracket(bracket, 0.25)
 						buttonDictionary.update({'bracketDown': False})
+						
 			except SystemExit:
 				running = False
 				time.sleep(5)				
