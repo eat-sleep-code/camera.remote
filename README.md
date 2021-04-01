@@ -60,6 +60,23 @@ camera.remote
 ```
 
 ---
+## Autostart at Desktop Login
+
+To autostart the program as soon as the Raspberry Pi OS desktop starts, execute the following command:
+
+```
+sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
+```
+
+Add the following line to the end of the file and then save the file:
+
+```
+@lxterminal --geometry=1x1 -e sudo python3 /home/pi/camera.remote/camera.py
+```
+
+:information_source:  &nbsp; Do not simultaneously autostart this program and one of the aforementioned software applications as they are designed to kill each other's processes.
+
+---
 
 ## Infrared Cameras
 If you are using an infrared (IR) camera, you will need to modify the Auto White Balance (AWB) mode at boot time.
