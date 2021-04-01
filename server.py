@@ -173,7 +173,7 @@ PAGE="""\
 		{
 			50% 
 			{
-				opacity: 0;
+				color: rgba(255, 0, 0, 0);
 			}
 		}
 	</style>
@@ -189,7 +189,7 @@ PAGE="""\
 				<label>Capture</label>
 				<div>
 					<a href="/control/capture/photo" class="control-button">&#10030;</a>
-					<a href="/control/capture/video" class="control-button red"><span>&#9679</span></a>
+					<a href="/control/capture/video" class="control-button red">&#9679</a>
 				</div>
 			</div>
 			<div class="control-group">
@@ -314,6 +314,16 @@ PAGE="""\
 			xhr.send();
 			event.preventDefault();
 			cycleImage();
+			
+			/* Toggle blink on record button */
+			if (url == '/control/capture/video') {
+				if (event.classList.contains('blink')) {
+					event.classList.remove('blink');
+				}
+				else {
+					event.classList.add('blink');
+				}
+			}
 		}));
 
 		
