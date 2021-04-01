@@ -2,27 +2,7 @@
 
 Combining this program with a Raspberry Pi HQ camera, a Raspberry Pi Zero WH, and an Adafruit 16-LED NeoPixel ring will result in a camera that can be controlled via a web page.
 
----
-
-## Web-Based Control
-
-The following attributes can be adjusted from the web interface:
-
-1) Capture
-     - Still Photo
-     - Video*
-1) Shutter Speed
-1) ISO
-1) Exposure Compensation
-1) Bracketing
-1) Scene Lighting - *currently limited to control of a 16-LED NeoPixel array*
-     - All Lights (on/off)
-     - Natural White (256 steps)
-     - Red (256 steps)
-     - Green (256 steps)
-     - Blue (256 steps)
-
-:information_source: &nbsp; *The primary intended use of this application is for still photography / photogammetry.  Preview is suspended during video capture due to apparent hardware limitations.   This system can be used to capture video, but it currently is not user-friendly.*
+:information_source: &nbsp; *The primary intended use of this application is for still photography and photogammetry.  Preview is suspended during video capture due to apparent hardware limitations.   This system can be used to capture video, but it currently is not user-friendly.*
 
 ---
 ## Use With Other Camera Software
@@ -58,6 +38,23 @@ sudo chmod +x ~/install-camera.sh && ~/install-camera.sh
 ```
 camera.remote
 ```
+
+### Web Controls
+The following attributes can be adjusted from the web interface:
+
+1) Capture
+     - Still Photo
+     - Video*
+1) Shutter Speed
+1) ISO
+1) Exposure Compensation
+1) Bracketing
+1) Scene Lighting - *currently limited to control of a 16-LED NeoPixel array*
+     - All Lights (on/off)
+     - Natural White (256 steps)
+     - Red (256 steps)
+     - Green (256 steps)
+     - Blue (256 steps)
 
 ---
 ## Autostart at Desktop Login
