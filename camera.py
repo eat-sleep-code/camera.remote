@@ -227,7 +227,7 @@ def setBracket(input, wait = 0, displayMessage = True):
 			bracketHigh = evMax
 		if displayMessage == True:
 			print(' Exposure Bracketing: ' + str(bracket))
-			statusDictionary.update({'message': ' Exposure Bracketing: ' + str(bracket)})
+			statusDictionary.update({'message': ' Exposure Bracketing: &#177;' + str(bracket)})
 		time.sleep(wait)
 		return
 	except Exception as ex:

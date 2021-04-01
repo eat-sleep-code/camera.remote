@@ -188,36 +188,36 @@ PAGE="""\
 			<div class="control-group">
 				<label>Capture</label>
 				<div>
-					<a href="/control/capture/photo" class="control-button">&#10030;</a>
-					<a href="/control/capture/video" class="control-button red">&#9679</a>
+					<a href="/control/capture/photo" class="control-button" title="Capture Photo">&#10030;</a>
+					<a href="/control/capture/video" class="control-button red" title="Capture Video">&#9679</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Shutter Speed</label>
 				<div>
-					<a href="/control/shutter/up" class="control-button">&#8853;</a>
-					<a href="/control/shutter/down" class="control-button">&#8854;</a>
+					<a href="/control/shutter/up" class="control-button" title="Increase Shutter Speed (Shorter)">&#8853;</a>
+					<a href="/control/shutter/down" class="control-button" title="Decrease Shutter Speed (Longer)">&#8854;</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>ISO</label>
 				<div>
-					<a href="/control/iso/up" class="control-button">&#8853;</a>
-					<a href="/control/iso/down" class="control-button">&#8854;</a>
+					<a href="/control/iso/up" class="control-button" title="Increase ISO">&#8853;</a>
+					<a href="/control/iso/down" class="control-button" title="Decrease ISO">&#8854;</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Exposure Compensation</label>
 				<div>
-					<a href="/control/ev/up" class="control-button">&#8853;</a>
-					<a href="/control/ev/down" class="control-button">&#8854;</a>
+					<a href="/control/ev/up" class="control-button" title="Increase Exposure Compensation">&#8853;</a>
+					<a href="/control/ev/down" class="control-button" title="Decrease Exposure Compensation">&#8854;</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Bracketing</label>
 				<div>
-					<a href="/control/bracket/up" class="control-button">&#8853;</a>
-					<a href="/control/bracket/down" class="control-button">&#8854;</a>
+					<a href="/control/bracket/up" class="control-button" title="Increase Bracket Stops">&#8853;</a>
+					<a href="/control/bracket/down" class="control-button" title="Decrease Bracket Stops">&#8854;</a>
 				</div>
 			</div>
 		</div>
@@ -225,26 +225,32 @@ PAGE="""\
 			<label>Scene Lighting</label>
 			<div class="control-group">
 				<div>
-					<a href="/control/light/white/up" class="control-button white">&#9728;</a>
-					<a href="/control/light/white/down" class="control-button white dim">&#9728;</a>	
+					<a href="/control/light/all/on" class="control-button white" title="Turn all lights on">&#10050;</a>
+					<a href="/control/light/all/off" class="control-button white dim" title="Turn all lights off">&#9790;</a>	
 				</div>
 			</div>
 			<div class="control-group">
 				<div>
-					<a href="/control/light/red/up" class="control-button red">&#9728;</a>
-					<a href="/control/light/red/down" class="control-button red dim">&#9728;</a>
+					<a href="/control/light/white/up" class="control-button white" title="Increase natural white light level">&#9728;</a>
+					<a href="/control/light/white/down" class="control-button white dim" title="Decrease natural white light level">&#9728;</a>	
 				</div>
 			</div>
 			<div class="control-group">
 				<div>
-					<a href="/control/light/green/up" class="control-button green">&#9728;</a>
-					<a href="/control/light/green/down" class="control-button green dim">&#9728;</a>
+					<a href="/control/light/red/up" class="control-button red" title="Increase red light level">&#9728;</a>
+					<a href="/control/light/red/down" class="control-button red dim" title="Decrease red light level">&#9728;</a>
 				</div>
 			</div>
 			<div class="control-group">
 				<div>
-					<a href="/control/light/blue/up" class="control-button blue">&#9728;</a>
-					<a href="/control/light/blue/down" class="control-button blue dim">&#9728;</a>
+					<a href="/control/light/green/up" class="control-button green" title="Increase green light level">&#9728;</a>
+					<a href="/control/light/green/down" class="control-button green dim" title="Decrease green light level">&#9728;</a>
+				</div>
+			</div>
+			<div class="control-group">
+				<div>
+					<a href="/control/light/blue/up" class="control-button blue" title="Increase blue light level">&#9728;</a>
+					<a href="/control/light/blue/down" class="control-button blue dim" title="Decrease blue light level">&#9728;</a>
 				</div>
 			</div>
 		</div>
@@ -432,6 +438,18 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			elif self.path == '/control/bracket/down':	
 				buttonDictionary.update({'bracketDown': True})
 
+			elif self.path == '/control/light/all/on':	
+				buttonDictionary.update({'lightW': 255})
+				buttonDictionary.update({'lightR': 255})
+				buttonDictionary.update({'lightG': 255})
+				buttonDictionary.update({'lightB': 255})
+
+			elif self.path == '/control/light/all/off':	
+				buttonDictionary.update({'lightW': 0})
+				buttonDictionary.update({'lightR': 0})
+				buttonDictionary.update({'lightG': 0})
+				buttonDictionary.update({'lightB': 0})
+
 			elif self.path == '/control/light/white/up':	
 				if buttonDictionary['lightW'] < 255:
 					buttonDictionary.update({'lightW': buttonDictionary['lightW'] + 1})
@@ -545,8 +563,3 @@ def pauseStream(camera):
 	except Exception as ex:
 		print(str(ex))
 		pass
-			
-
-
-
-
