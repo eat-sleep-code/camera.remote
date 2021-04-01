@@ -314,7 +314,7 @@ PAGE="""\
 			xhr.send();
 
 			/* Toggle blink on record button */
-			console.log(url)
+			console.log(url, this)
 			if (url == '/control/capture/video') {
 				console.log(url, event.target);
 				if (event.classList.contains('blink')) {
