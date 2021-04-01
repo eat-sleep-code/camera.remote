@@ -312,21 +312,19 @@ PAGE="""\
 			var url = targetElement.href;
 			console.log(url, targetElement, targetElement.classList)
 			
+			/* Toggle blink on record button */
+			if (url.endsWith('/control/capture/video')) {
+				if (targetElement.classList.contains('blink')) {
+					targetElement.classList.remove('blink');
+				}
+				else {
+					targetElement.classList.add('blink');
+				}
+			}
+			
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
-
-			/* Toggle blink on record button */
-			if (url.endsWith('/control/capture/video')) {
-				console.log(url, event.target);
-				if (event.classList.contains('blink')) {
-					event.classList.remove('blink');
-				}
-				else {
-					event.classList.add('blink');
-				}
-			}
-
 			event.preventDefault();
 			cycleImage();
 			
