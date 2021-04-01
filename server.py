@@ -22,6 +22,7 @@ PAGE="""\
 	<style>
 		body 
 		{
+			background: rgba(8, 8, 8, 1.0); 
 			color: rgba(255, 255, 255, 1.0);
 			font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 			margin: 0; 
@@ -31,15 +32,16 @@ PAGE="""\
 		.wrapper 
 		{
 			align-items: center; 
-			background: rgba(8, 8, 8, 1.0); 
 			box-sizing: border-box;
 			display: flex; 
 			flex-wrap: wrap;
 			height: 100vh;
 			justify-content: center;
+			margin: auto;
+			max-width: 960px;
 			overflow-x: hidden;
 			padding-bottom: 60px; 
-			width: 100vw; 
+			width: 100%; 
 		}
 
 		.wrapper > div 
