@@ -308,13 +308,13 @@ PAGE="""\
 
 		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
+			console.log('target', event.target);
 			var url = event.target.href;
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
 
 			/* Toggle blink on record button */
-			console.log(url, this)
 			if (url == '/control/capture/video') {
 				console.log(url, event.target);
 				if (event.classList.contains('blink')) {
