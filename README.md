@@ -20,7 +20,7 @@ The following attributes can be adjusted from the web interface:
      * White 
    
 
-:information_source:  The primary purpose of this application is intended still photography /photogammetry.  Video preview is suspended during capture due to apparent hardware limitations.   This system can be used to capture video, but currently it is not user-friendly.  
+:information_source:  The primary purpose of this application is intended still photography / photogammetry.  Video preview is suspended during capture due to apparent hardware limitations.   This system can be used to capture video, but currently it is not user-friendly.  
 
 ---
 ## Getting Started
