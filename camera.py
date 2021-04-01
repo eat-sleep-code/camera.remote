@@ -446,7 +446,7 @@ try:
 				elif buttonDictionary['shutterUp'] == True:
 					if shutter == 0:
 						shutter = shutterShort
-					if shutter > shutterShort and shutter <= shutterLong:					
+					elif shutter > shutterShort and shutter <= shutterLong:					
 						shutter = int(shutter / 1.5)
 					setShutter(shutter, 0.25)
 					buttonDictionary.update({'shutterUp': False})
@@ -464,7 +464,7 @@ try:
 				elif buttonDictionary['isoUp'] == True:
 					if iso == 0:
 						iso = isoMin
-					if iso >= isoMin and iso < isoMax:					
+					elif iso >= isoMin and iso < isoMax:					
 						iso = int(iso * 2)
 					setISO(iso, 0.25)
 					buttonDictionary.update({'isoUp': False})
