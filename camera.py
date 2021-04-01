@@ -15,6 +15,13 @@ import time
 
 version = '2021.03.31'
 
+# Kill other camera script(s)
+try:
+	cameraZeroScript = "/home/pi/camera.zero/camera.py"
+	subprocess.check_call(['pkill', '-9', '-f', cameraZeroScript])
+except Exception as ex:
+	pass
+
 camera = PiCamera()
 PiCamera.CAPTURE_TIMEOUT = 1500
 camera.resolution = camera.MAX_RESOLUTION
@@ -494,7 +501,7 @@ try:
 						bracket = int(bracket - 1)
 						setBracket(bracket, 0.25)
 						buttonDictionary.update({'bracketDown': False})
-						
+
 			except SystemExit:
 				running = False
 				time.sleep(5)				
