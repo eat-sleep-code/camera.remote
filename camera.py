@@ -340,7 +340,7 @@ try:
 		# print(str(camera.resolution))
 		
 
-		print('\n Camera ' + version )
+		print('\n Camera Remote ' + version )
 		print('\n ----------------------------------------------------------------------')
 		time.sleep(2)
 

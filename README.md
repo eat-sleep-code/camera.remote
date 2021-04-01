@@ -3,6 +3,26 @@
 Combining this program with a Raspberry Pi HQ camera, a Raspberry Pi Zero WH, and an Adafruit 16-LED NeoPixel ring will result in a camera that can be controlled via a web page.
 
 ---
+
+The following attributes can be adjusted from the web interface:
+
+1) Capture
+     * Still Photo
+     * Video*
+1) Shutter Speed
+1) ISO
+1) Exposure Compensation
+1) Bracketing
+1) Scene Lighting - Currently limited to a 16-LED NeoPixel.
+     * Red
+     * Green
+     * Blue
+     * White 
+   
+
+:information_source:  The primary purpose of this application is intended still photography /photogammetry.  Video preview is suspended during capture due to apparent hardware limitations.   This system can be used to capture video, but currently it is not user-friendly.  
+
+---
 ## Getting Started
 
 - Use [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) to:
