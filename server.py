@@ -312,12 +312,11 @@ PAGE="""\
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
-			event.preventDefault();
-			cycleImage();
-			
+
 			/* Toggle blink on record button */
+			console.log(url)
 			if (url == '/control/capture/video') {
-				console.log(event, element);
+				console.log(url, event, element);
 				if (event.classList.contains('blink')) {
 					event.classList.remove('blink');
 				}
@@ -325,6 +324,11 @@ PAGE="""\
 					event.classList.add('blink');
 				}
 			}
+
+			event.preventDefault();
+			cycleImage();
+			
+			
 		}));
 
 		
