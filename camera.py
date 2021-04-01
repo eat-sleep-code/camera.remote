@@ -17,6 +17,10 @@ version = '2021.04.01'
 
 # Kill other camera script(s)
 try:
+	cameraScript = "/home/pi/camera/camera.py"
+	subprocess.check_call(['pkill', '-9', '-f', cameraScript])
+	cameraTimelapseScript = "/home/pi/camera.timelapse/camera.timelapse.py"
+	subprocess.check_call(['pkill', '-9', '-f', cameraTimelapseScript])
 	cameraZeroScript = "/home/pi/camera.zero/camera.py"
 	subprocess.check_call(['pkill', '-9', '-f', cameraZeroScript])
 except Exception as ex:
