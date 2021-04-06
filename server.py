@@ -335,7 +335,7 @@ PAGE="""\
 		}
 
 
-		var controls = document.querySelectorAll('.control-button i');
+		var controls = document.querySelectorAll('.control-button > *');
 		controls.forEach(element => element.addEventListener('click', event => {
 			var targetElement = event.parentElement.target;
 			var url = targetElement.href;
