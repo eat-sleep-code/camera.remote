@@ -350,18 +350,18 @@ PAGE="""\
 			var url = targetElement.getAttribute('data-url');
 			console.log(url, targetElement, targetElement.classList)
 			
-			var continue = false;
+			var confirmedButtonAction = false;
 			if (url.endsWith('/control/exit')) {
-				continue = confirm("Exit the camera program?");
+				confirmedButtonAction = confirm("Exit the camera program?");
 			}
 			else if (url.endsWith('/control/trackball')) {
-				continue = confirm("Switch to trackball control?");
+				confirmedButtonAction = confirm("Switch to trackball control?");
 			}
 			else {
-				continue = true;
+				confirmedButtonAction = true;
 			}
 			
-			if (continue == true) {
+			if (confirmedButtonAction == true) {
 				/* Toggle blink on record button */
 				if (url.endsWith('/control/capture/video')) {
 					if (targetElement.classList.contains('blink')) {
