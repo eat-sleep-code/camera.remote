@@ -335,9 +335,9 @@ PAGE="""\
 		}
 
 
-		var controls = document.querySelectorAll('.control-button > *');
+		var controls = document.querySelectorAll('.control-button *');
 		controls.forEach(element => element.addEventListener('click', event => {
-			var targetElement = event.parentElement.target;
+			var targetElement = event.target.closest('.control-button');
 			var url = targetElement.href;
 			console.log(url, targetElement, targetElement.classList)
 			
@@ -354,7 +354,7 @@ PAGE="""\
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
-			event.parentElement.preventDefault();
+			event.preventDefault();
 			cycleImage();
 			
 			
