@@ -131,6 +131,7 @@ PAGE="""\
 			text-decoration: none;
 			width: 42px;
 			opacity: 0.8;
+			outline: none; 
 		}
 
 		.control-button:hover
