@@ -13,18 +13,7 @@ import threading
 import time
 
 
-version = '2021.04.01'
-
-# Kill other camera script(s)
-try:
-	cameraScript = "/home/pi/camera/camera.py"
-	subprocess.check_call(['pkill', '-9', '-f', cameraScript])
-	cameraTimelapseScript = "/home/pi/camera.timelapse/camera.timelapse.py"
-	subprocess.check_call(['pkill', '-9', '-f', cameraTimelapseScript])
-	cameraZeroScript = "/home/pi/camera.zero/camera.py"
-	subprocess.check_call(['pkill', '-9', '-f', cameraZeroScript])
-except Exception as ex:
-	pass
+version = '2021.04.05'
 
 camera = PiCamera()
 PiCamera.CAPTURE_TIMEOUT = 1500
@@ -35,10 +24,8 @@ camera.framerate = 30
 dng = RPICAM2DNG()
 running = False
 statusDictionary = {'message': '', 'action': '', 'colorR': 0, 'colorG': 0, 'colorB': 0, 'colorW': 0}
-buttonDictionary = {'switchMode': 0, 'shutterUp': False, 'shutterDown': False, 'isoUp': False, 'isoDown': False, 'evUp': False, 'evDown': False, 'bracketUp': False, 'bracketDown': False, 'capture': False, 'captureVideo': False, 'isRecording': False, 'lightR': 0, 'lightB': 0, 'lightG': 0, 'lightW': 0}
+buttonDictionary = {'switchMode': 0, 'shutterUp': False, 'shutterDown': False, 'isoUp': False, 'isoDown': False, 'evUp': False, 'evDown': False, 'bracketUp': False, 'bracketDown': False, 'capture': False, 'captureVideo': False, 'isRecording': False, 'lightR': 0, 'lightB': 0, 'lightG': 0, 'lightW': 0, 'trackball': False, 'exit': False}
 	
-action = 'capture'
-
 shutter = 'auto'
 shutterLong = 30000
 shutterLongThreshold = 1000
@@ -65,7 +52,7 @@ outputFolder = 'dcim/'
 
 timer = 0
 
-raw = True
+raw = False
 
 
 
@@ -369,9 +356,23 @@ try:
 		
 		while True:
 			try:
+
+				if buttonDictionary['exit'] == True or buttonDictionary['trackball'] == True:
+					running = False
+					darkMode()
+					echoOn()
+					camera.close()
+					time.sleep(1.0)
 					
+					if buttonDictionary['trackball'] == True:
+						try:
+							subprocess.Popen(['sudo', 'python3', '/home/pi/camera.zero/camera.py'])	
+						except Exception as ex:
+							print(' Could not switch to trackball control ')
+					sys.exit(0)
+
 				# Capture
-				if buttonDictionary['capture'] == True:
+				elif buttonDictionary['capture'] == True:
 					
 					if mode == 'persistent':
 						# Normal photo
@@ -508,28 +509,10 @@ try:
 						setBracket(bracket, 0.25)
 						buttonDictionary.update({'bracketDown': False})
 
-			except SystemExit:
-				running = False
-				time.sleep(5)				
-				os.kill(os.getpid(), signal.SIGSTOP)
-				sys.exit(0)
 			except Exception as ex:
 				print(str(ex))
 				pass
 
-	def CaptureAndUploadImage():
-		Capture()
-		time.sleep(1000)
-		# Not yet implemented
-
-	# print(' Action: ' + action)
-	if action == 'capturesingle' or action == 'single':
-		Capture('single')
-	elif action == 'timelapse':
-		Capture('timelapse')
-	elif action == 'video':
-		Capture('video')
-	else:
 		Capture()
 
 except KeyboardInterrupt:
