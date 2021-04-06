@@ -198,43 +198,43 @@ PAGE="""\
 			<div class="control-group">
 				<label>Capture</label>
 				<div>
-					<a href="/control/capture/photo" class="control-button" title="Capture Photo"><i class="fas fa-camera"></i></a>
-					<a href="/control/capture/video" class="control-button red" title="Capture Video"><i class="fas fa-video"></i></a>
+					<button data-url="/control/capture/photo" class="control-button" title="Capture Photo"><i class="fas fa-camera"></i></button>
+					<button data-url="/control/capture/video" class="control-button red" title="Capture Video"><i class="fas fa-video"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Shutter Speed</label>
 				<div>
-					<a href="/control/shutter/up" class="control-button" title="Increase Shutter Speed (Shorter)"><i class="fas fa-plus-circle"></i></a>
-					<a href="/control/shutter/down" class="control-button" title="Decrease Shutter Speed (Longer)"><i class="fas fa-minus-circle"></i></a>
+					<button data-url="/control/shutter/up" class="control-button" title="Increase Shutter Speed (Shorter)"><i class="fas fa-plus-circle"></i></button>
+					<button data-url="/control/shutter/down" class="control-button" title="Decrease Shutter Speed (Longer)"><i class="fas fa-minus-circle"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>ISO</label>
 				<div>
-					<a href="/control/iso/up" class="control-button" title="Increase ISO"><i class="fas fa-plus-circle"></i></a>
-					<a href="/control/iso/down" class="control-button" title="Decrease ISO"><i class="fas fa-minus-circle"></i></a>
+					<button data-url="/control/iso/up" class="control-button" title="Increase ISO"><i class="fas fa-plus-circle"></i></button>
+					<button data-url="/control/iso/down" class="control-button" title="Decrease ISO"><i class="fas fa-minus-circle"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Exposure Compensation</label>
 				<div>
-					<a href="/control/ev/up" class="control-button" title="Increase Exposure Compensation"><i class="fas fa-plus-circle"></i></a>
-					<a href="/control/ev/down" class="control-button" title="Decrease Exposure Compensation"><i class="fas fa-minus-circle"></i></a>
+					<button data-url="/control/ev/up" class="control-button" title="Increase Exposure Compensation"><i class="fas fa-plus-circle"></i></button>
+					<button data-url="/control/ev/down" class="control-button" title="Decrease Exposure Compensation"><i class="fas fa-minus-circle"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Bracketing</label>
 				<div>
-					<a href="/control/bracket/up" class="control-button" title="Increase Bracket Stops"><i class="fas fa-plus-circle"></i></a>
-					<a href="/control/bracket/down" class="control-button" title="Decrease Bracket Stops"><i class="fas fa-minus-circle"></i></a>
+					<button data-url="/control/bracket/up" class="control-button" title="Increase Bracket Stops"><i class="fas fa-plus-circle"></i></button>
+					<button data-url="/control/bracket/down" class="control-button" title="Decrease Bracket Stops"><i class="fas fa-minus-circle"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Exit</label>
 				<div>
-					<a href="/control/trackball" class="control-button" title="Switch to Trackball Control"><i class="fas fa-bowling-ball"></i></a>
-					<a href="/control/exit" class="control-button" title="Exit"><i class="far fa-times-circle"></i></a>
+					<button data-url="/control/trackball" class="control-button" title="Switch to Trackball Control"><i class="fas fa-bowling-ball"></i></button>
+					<button data-url="/control/exit" class="control-button" title="Exit"><i class="far fa-times-circle"></i></button>
 				</div>
 			</div>
 		</div>
@@ -242,36 +242,36 @@ PAGE="""\
 			<div class="control-group">
 				<div>
 					<label>Master Control</label>
-					<a href="/control/light/all/on" class="control-button white" title="Turn all lights on"><i class="fas fa-sun"></i></a>
-					<a href="/control/light/all/off" class="control-button white dim" title="Turn all lights off"><i class="far fa-sun"></i></a>	
+					<button data-url="/control/light/all/on" class="control-button white" title="Turn all lights on"><i class="fas fa-sun"></i></button>
+					<button data-url="/control/light/all/off" class="control-button white dim" title="Turn all lights off"><i class="far fa-sun"></i></button>	
 				</div>
 			</div>
 			<div class="control-group">
 				<div>
 					<label>Natural White</label>
-					<a href="/control/light/white/up" class="control-button white" title="Increase natural white light level"><i class="fas fa-lightbulb"></i></a>
-					<a href="/control/light/white/down" class="control-button white dim" title="Decrease natural white light level"><i class="far fa-lightbulb"></i></a>	
+					<button data-url="/control/light/white/up" class="control-button white" title="Increase natural white light level"><i class="fas fa-lightbulb"></i></button>
+					<button data-url="/control/light/white/down" class="control-button white dim" title="Decrease natural white light level"><i class="far fa-lightbulb"></i></button>	
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Red</label>
 				<div>
-					<a href="/control/light/red/up" class="control-button red" title="Increase red light level"><i class="fas fa-lightbulb"></i></a>
-					<a href="/control/light/red/down" class="control-button red dim" title="Decrease red light level"><i class="far fa-lightbulb"></i></a>
+					<button data-url="/control/light/red/up" class="control-button red" title="Increase red light level"><i class="fas fa-lightbulb"></i></button>
+					<button data-url="/control/light/red/down" class="control-button red dim" title="Decrease red light level"><i class="far fa-lightbulb"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Green</label>
 				<div>
-					<a href="/control/light/green/up" class="control-button green" title="Increase green light level"><i class="fas fa-lightbulb"></i></a>
-					<a href="/control/light/green/down" class="control-button green dim" title="Decrease green light level"><i class="far fa-lightbulb"></i></a>
+					<button data-url="/control/light/green/up" class="control-button green" title="Increase green light level"><i class="fas fa-lightbulb"></i></button>
+					<button data-url="/control/light/green/down" class="control-button green dim" title="Decrease green light level"><i class="far fa-lightbulb"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Blue</label>
 				<div>
-					<a href="/control/light/blue/up" class="control-button blue" title="Increase blue light level"><i class="fas fa-lightbulb"></i></a>
-					<a href="/control/light/blue/down" class="control-button blue dim" title="Decrease blue light level"><i class="far fa-lightbulb"></i></a>
+					<button data-url="/control/light/blue/up" class="control-button blue" title="Increase blue light level"><i class="fas fa-lightbulb"></i></button>
+					<button data-url="/control/light/blue/down" class="control-button blue dim" title="Decrease blue light level"><i class="far fa-lightbulb"></i></button>
 				</div>
 			</div>
 		</div>
@@ -335,10 +335,10 @@ PAGE="""\
 		}
 
 
-		var controls = document.querySelectorAll('.control-button *');
+		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
-			var targetElement = event.target.closest('.control-button');
-			var url = targetElement.href;
+			var targetElement = event.target;
+			var url = targetElement.getAttribute('data-url');
 			console.log(url, targetElement, targetElement.classList)
 			
 			/* Toggle blink on record button */
