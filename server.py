@@ -350,28 +350,34 @@ PAGE="""\
 			var url = targetElement.getAttribute('data-url');
 			console.log(url, targetElement, targetElement.classList)
 			
-			/* Toggle blink on record button */
-			if (url.endsWith('/control/capture/video')) {
-				if (targetElement.classList.contains('blink')) {
-					targetElement.classList.remove('blink');
-				}
-				else {
-					targetElement.classList.add('blink');
-				}
+			var continue = false;
+			if (url.endsWith('/control/exit')) {
+				continue = confirm("Exit the camera program?");
+			}
+			else if (url.endsWith('/control/trackball')) {
+				continue = confirm("Switch to trackball control?");
+			}
+			else {
+				continue = true;
 			}
 			
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', url);
-			xhr.send();
-			cycleImage();
-			
-			
+			if (continue == true) {
+				/* Toggle blink on record button */
+				if (url.endsWith('/control/capture/video')) {
+					if (targetElement.classList.contains('blink')) {
+						targetElement.classList.remove('blink');
+					}
+					else {
+						targetElement.classList.add('blink');
+					}
+				}
+				
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', url);
+				xhr.send();
+				cycleImage();
+			}
 		}));
-
-		
-	</script>
-
-		
 	</script>
 </body>
 </html>
