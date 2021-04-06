@@ -119,11 +119,14 @@ PAGE="""\
 
 		.control-button
 		{
+			background: rgba(0, 0, 0, 0);
+			border: 0;
 			color: rgba(255, 255, 255, 1.0);
 			display: inline-block;
 			font-size: 36px;
 			height: 42px;
 			margin: 12px;
+			padding: 0;
 			text-align: center;
 			text-decoration: none;
 			width: 42px;
@@ -337,7 +340,7 @@ PAGE="""\
 
 		var controls = document.querySelectorAll('.control-button');
 		controls.forEach(element => element.addEventListener('click', event => {
-			var targetElement = event.target;
+			var targetElement = event.target.closest('.control-button');
 			var url = targetElement.getAttribute('data-url');
 			console.log(url, targetElement, targetElement.classList)
 			
@@ -354,7 +357,6 @@ PAGE="""\
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
-			event.preventDefault();
 			cycleImage();
 			
 			
