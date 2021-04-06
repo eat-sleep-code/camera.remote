@@ -354,7 +354,7 @@ PAGE="""\
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.send();
-			event.preventDefault();
+			event.parentElement.preventDefault();
 			cycleImage();
 			
 			
