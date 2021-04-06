@@ -93,14 +93,23 @@ PAGE="""\
 		.controls > label 
 		{
 			align-items: center;
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 4px;
 			font-size: 12px;
-			display: flex;
+			display: block;
 			justify-content: center;
 			line-height: 12px;
-			height: 24px;
+			overflow: hidden;
 			padding: 6px;
 			text-align: center;
-			width: 90px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 132px;
+		}
+
+		.control-group > div
+		{
+			text-align: center;
 		}
 
 		.controls > label
@@ -114,11 +123,11 @@ PAGE="""\
 			display: inline-block;
 			font-size: 36px;
 			height: 42px;
-			margin: 3px;
+			margin: 12px;
 			text-align: center;
 			text-decoration: none;
 			width: 42px;
-			opacity: 0.9;
+			opacity: 0.8;
 		}
 
 		.control-button:hover
@@ -222,7 +231,7 @@ PAGE="""\
 				</div>
 			</div>
 			<div class="control-group">
-				<label>&nbsp;</label>
+				<label>Exit</label>
 				<div>
 					<a href="/control/trackball" class="control-button" title="Switch to Trackball Control"><i class="fas fa-bowling-ball"></i></a>
 					<a href="/control/exit" class="control-button" title="Exit"><i class="far fa-times-circle"></i></a>
@@ -230,32 +239,36 @@ PAGE="""\
 			</div>
 		</div>
 		<div class="controls">
-			<label>Scene Lighting</label>
 			<div class="control-group">
 				<div>
+					<label>Master Control</label>
 					<a href="/control/light/all/on" class="control-button white" title="Turn all lights on"><i class="fas fa-sun"></i></a>
 					<a href="/control/light/all/off" class="control-button white dim" title="Turn all lights off"><i class="far fa-sun"></i></a>	
 				</div>
 			</div>
 			<div class="control-group">
 				<div>
+					<label>Natural White</label>
 					<a href="/control/light/white/up" class="control-button white" title="Increase natural white light level"><i class="fas fa-lightbulb"></i></a>
 					<a href="/control/light/white/down" class="control-button white dim" title="Decrease natural white light level"><i class="far fa-lightbulb"></i></a>	
 				</div>
 			</div>
 			<div class="control-group">
+				<label>Red</label>
 				<div>
 					<a href="/control/light/red/up" class="control-button red" title="Increase red light level"><i class="fas fa-lightbulb"></i></a>
 					<a href="/control/light/red/down" class="control-button red dim" title="Decrease red light level"><i class="far fa-lightbulb"></i></a>
 				</div>
 			</div>
 			<div class="control-group">
+				<label>Green</label>
 				<div>
 					<a href="/control/light/green/up" class="control-button green" title="Increase green light level"><i class="fas fa-lightbulb"></i></a>
 					<a href="/control/light/green/down" class="control-button green dim" title="Decrease green light level"><i class="far fa-lightbulb"></i></a>
 				</div>
 			</div>
 			<div class="control-group">
+				<label>Blue</label>
 				<div>
 					<a href="/control/light/blue/up" class="control-button blue" title="Increase blue light level"><i class="fas fa-lightbulb"></i></a>
 					<a href="/control/light/blue/down" class="control-button blue dim" title="Decrease blue light level"><i class="far fa-lightbulb"></i></a>
@@ -322,9 +335,9 @@ PAGE="""\
 		}
 
 
-		var controls = document.querySelectorAll('.control-button');
+		var controls = document.querySelectorAll('.control-button i');
 		controls.forEach(element => element.addEventListener('click', event => {
-			var targetElement = event.target;
+			var targetElement = event.parentElement.target;
 			var url = targetElement.href;
 			console.log(url, targetElement, targetElement.classList)
 			
