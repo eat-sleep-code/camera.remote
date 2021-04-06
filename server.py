@@ -131,10 +131,15 @@ PAGE="""\
 			text-decoration: none;
 			width: 42px;
 			opacity: 0.8;
-			outline: none; 
 		}
 
-		.control-button:hover
+		.control-button:focus
+		{
+			outline: none !important; 
+		}
+
+		.control-button:hover,
+		.control-button:focus
 		{
 			opacity: 1.0;
 		}
