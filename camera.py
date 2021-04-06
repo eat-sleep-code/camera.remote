@@ -513,7 +513,7 @@ try:
 				print(str(ex))
 				pass
 
-		Capture()
+	Capture()
 
 except KeyboardInterrupt:
 	darkMode()
