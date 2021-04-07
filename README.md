@@ -7,10 +7,8 @@ Combining this program with a Raspberry Pi HQ camera, a Raspberry Pi Zero WH, an
 ---
 ## Use With Other Camera Software
 
-**Optionally**, this application may be used in conjunction with one of the following applications.  These applications are all designed to kill the camera.remote script at startup (and vice versa) to eliminate hardware-in-use errors.
-   - [Camera](https://github.com/eat-sleep-code/camera)
-   - [Camera.Zero](https://github.com/eat-sleep-code/camera.zero)
-   - [Camera.Timelapse](https://github.com/eat-sleep-code/camera.timelapse)
+**Optionally**, this application may be used in conjunction with one of the following applications:
+   - [Camera Zero](https://github.com/eat-sleep-code/camera.zero): Camera Remote can be triggered by long-pressing the pale orange button for 5 - 9 seconds.  You can switch back to trackball control from within Camera Remote.
 
 
 ---
