@@ -37,6 +37,7 @@ sudo chmod +x ~/install-camera.sh && ~/install-camera.sh
 camera.remote
 ```
 
+---
 ### Web Controls
 
 ![Interface Example](images/interface-example.png)
