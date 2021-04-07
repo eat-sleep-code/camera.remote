@@ -26,6 +26,7 @@ echo -e '\033[93mInstalling Camera Remote... \033[0m'
 cd ~
 sudo rm -Rf ~/camera.remote
 sudo git clone https://github.com/eat-sleep-code/camera.remote
+sudo mkdir -p ~/camera.remote/logs
 sudo chown -R $USER:$USER camera.remote
 cd camera.remote
 sudo chmod +x camera.py
@@ -41,9 +42,9 @@ wget -q https://github.com/davidplowman/Colour_Profiles/raw/master/imx477/PyDNG_
 wget -q https://github.com/davidplowman/Colour_Profiles/raw/master/imx477/Raspberry%20Pi%20High%20Quality%20Camera%20Lumariver%202860k-5960k%20Neutral%20Look.dcp -O ~/camera.remote/profiles/neutral.dcp
 wget -q https://github.com/davidplowman/Colour_Profiles/raw/master/imx477/Raspberry%20Pi%20High%20Quality%20Camera%20Lumariver%202860k-5960k%20Skin%2BSky%20Look.dcp -O ~/camera.remote/profiles/skin-and-sky.dcp
 
-cd ~
 echo ''
 echo -e '\033[93mSetting up alias... \033[0m'
+cd ~
 sudo touch ~/.bash_aliases
 sudo sed -i '/\b\(function camera.remote\)\b/d' ~/.bash_aliases
 sudo sed -i '$ a function camera.remote { sudo python3 ~/camera.remote/camera.py "$@"; }' ~/.bash_aliases

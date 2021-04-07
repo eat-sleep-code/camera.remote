@@ -207,15 +207,15 @@ PAGE="""\
 			<div class="control-group">
 				<label>Capture</label>
 				<div>
-					<button data-url="/control/capture/photo" class="control-button" title="Capture Photo"><i class="fas fa-camera"></i></button>
-					<button data-url="/control/capture/video" class="control-button red" title="Capture Video"><i class="fas fa-video"></i></button>
+					<button data-url="/control/capture/photo" class="control-button" title="Capture photo"><i class="fas fa-camera"></i></button>
+					<button data-url="/control/capture/video" class="control-button red" title="Capture video"><i class="fas fa-video"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Shutter Speed</label>
 				<div>
-					<button data-url="/control/shutter/up" class="control-button" title="Increase Shutter Speed (Shorter)"><i class="fas fa-plus-circle"></i></button>
-					<button data-url="/control/shutter/down" class="control-button" title="Decrease Shutter Speed (Longer)"><i class="fas fa-minus-circle"></i></button>
+					<button data-url="/control/shutter/up" class="control-button" title="Increase shutter speed (shorter)"><i class="fas fa-plus-circle"></i></button>
+					<button data-url="/control/shutter/down" class="control-button" title="Decrease shutter speed (longer)"><i class="fas fa-minus-circle"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
@@ -228,21 +228,21 @@ PAGE="""\
 			<div class="control-group">
 				<label>Exposure Compensation</label>
 				<div>
-					<button data-url="/control/ev/up" class="control-button" title="Increase Exposure Compensation"><i class="fas fa-plus-circle"></i></button>
-					<button data-url="/control/ev/down" class="control-button" title="Decrease Exposure Compensation"><i class="fas fa-minus-circle"></i></button>
+					<button data-url="/control/ev/up" class="control-button" title="Increase exposure compensation"><i class="fas fa-plus-circle"></i></button>
+					<button data-url="/control/ev/down" class="control-button" title="Decrease exposure compensation"><i class="fas fa-minus-circle"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Bracketing</label>
 				<div>
-					<button data-url="/control/bracket/up" class="control-button" title="Increase Bracket Stops"><i class="fas fa-plus-circle"></i></button>
-					<button data-url="/control/bracket/down" class="control-button" title="Decrease Bracket Stops"><i class="fas fa-minus-circle"></i></button>
+					<button data-url="/control/bracket/up" class="control-button" title="Increase exposure bracket stops"><i class="fas fa-plus-circle"></i></button>
+					<button data-url="/control/bracket/down" class="control-button" title="Decrease exposure bracket stops"><i class="fas fa-minus-circle"></i></button>
 				</div>
 			</div>
 			<div class="control-group">
 				<label>Exit</label>
 				<div>
-					<button data-url="/control/trackball" class="control-button" title="Switch to Trackball Control"><i class="fas fa-bowling-ball"></i></button>
+					<button data-url="/control/trackball" class="control-button" title="Switch to Trackball Control (if equipped)"><i class="fas fa-bowling-ball"></i></button>
 					<button data-url="/control/exit" class="control-button" title="Exit"><i class="far fa-times-circle"></i></button>
 				</div>
 			</div>

@@ -20,12 +20,14 @@ PiCamera.CAPTURE_TIMEOUT = 1500
 camera.resolution = camera.MAX_RESOLUTION
 camera.sensor_mode = 3
 camera.framerate = 30
-
 dng = RPICAM2DNG()
 running = False
 statusDictionary = {'message': '', 'action': '', 'colorR': 0, 'colorG': 0, 'colorB': 0, 'colorW': 0}
 buttonDictionary = {'switchMode': 0, 'shutterUp': False, 'shutterDown': False, 'isoUp': False, 'isoDown': False, 'evUp': False, 'evDown': False, 'bracketUp': False, 'bracketDown': False, 'capture': False, 'captureVideo': False, 'isRecording': False, 'lightR': 0, 'lightB': 0, 'lightG': 0, 'lightW': 0, 'trackball': False, 'exit': False}
-	
+
+outputLog = open('/home/pi/camera.remote/logs/output.log', 'w+')
+errorLog = open('/home/pi/camera.remote/logs/error.log', 'w+')
+
 shutter = 'auto'
 shutterLong = 30000
 shutterLongThreshold = 1000
@@ -58,10 +60,11 @@ raw = False
 
 # === Echo Control =============================================================
 
+os.environ['TERM'] = 'xterm-256color'
 def echoOff():
-	subprocess.Popen(['stty', '-echo'], shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+	subprocess.Popen(['stty', '-echo'], shell=True, stdout=subprocess.DEVNULL, stderr=errorLog)
 def echoOn():
-	subprocess.Popen(['stty', 'echo'], shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+	subprocess.Popen(['stty', 'echo'], shell=True, stdout=subprocess.DEVNULL, stderr=errorLog)
 def clear():
 	subprocess.Popen('clear' if os.name == 'posix' else 'cls')
 clear()
@@ -368,7 +371,7 @@ try:
 					
 					if buttonDictionary['trackball'] == True:
 						try:
-							subprocess.Popen(['sudo', 'python3', '/home/pi/camera.zero/camera.py'])	
+							subprocess.Popen(['sudo', 'python3', '/home/pi/camera.zero/camera.py'], stdout=outputLog, stderr=errorLog)	
 						except Exception as ex:
 							print(' Could not switch to trackball control ')
 					sys.exit(0)
