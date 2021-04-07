@@ -37,9 +37,10 @@ sudo chmod +x ~/install-camera.sh && ~/install-camera.sh
 camera.remote
 ```
 
+### Web Controls
+
 ![Interface Example](images/interface-example.png)
 
-### Web Controls
 The following attributes can be adjusted from the web interface:
 
 1) Capture
