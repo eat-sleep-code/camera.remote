@@ -49,6 +49,7 @@ The following attributes can be adjusted from the web interface:
 1) ISO
 1) Exposure Compensation
 1) Bracketing
+1) Toggle trackball control (if equipped)
 1) Scene Lighting - *currently limited to control of a 16-LED NeoPixel array*
      - All Lights (on/off)
      - Natural White (256 steps)
