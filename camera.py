@@ -1,6 +1,6 @@
 #/usr/bin/python3
 from picamera import PiCamera
-from pydng.core import RPICAM2DNG
+from pidng.core import RPICAM2DNG
 from light import Light
 import server
 import datetime
@@ -13,7 +13,7 @@ import threading
 import time
 
 
-version = '2021.04.06'
+version = '2022.01.03'
 
 camera = PiCamera()
 PiCamera.CAPTURE_TIMEOUT = 1500
