@@ -1,6 +1,5 @@
 #/usr/bin/python3
 from picamera import PiCamera
-from pidng.core import RPICAM2DNG
 from light import Light
 import server
 import datetime
@@ -13,14 +12,13 @@ import threading
 import time
 
 
-version = '2022.01.03'
+version = '2022.01.06'
 
 camera = PiCamera()
 PiCamera.CAPTURE_TIMEOUT = 1500
 camera.resolution = camera.MAX_RESOLUTION
 camera.sensor_mode = 3
 camera.framerate = 30
-dng = RPICAM2DNG()
 running = False
 statusDictionary = {'message': '', 'action': '', 'colorR': 0, 'colorG': 0, 'colorB': 0, 'colorW': 0}
 buttonDictionary = {'switchMode': 0, 'shutterUp': False, 'shutterDown': False, 'isoUp': False, 'isoDown': False, 'evUp': False, 'evDown': False, 'bracketUp': False, 'bracketDown': False, 'capture': False, 'captureVideo': False, 'isRecording': False, 'lightR': 0, 'lightB': 0, 'lightG': 0, 'lightW': 0, 'trackball': False, 'exit': False}
@@ -55,7 +53,12 @@ outputFolder = 'dcim/'
 timer = 0
 
 raw = False
-
+try:
+	from pidng.core import RPICAM2DNG
+	dng = RPICAM2DNG()
+	raw = True
+except:
+	print( ' WARNING: DNG file format not currently supported on this device.  ')
 
 
 # === Echo Control =============================================================
@@ -276,7 +279,7 @@ def getFilePath(timestamped = True, isVideo = False):
 
 # ------------------------------------------------------------------------------
 
-def captureImage(filepath, raw = True):
+def captureImage(filepath, raw=False):
 	camera.capture(filepath, quality=100, bayer=raw)
 	if raw == True:
 		conversionThread = threading.Thread(target=convertBayerDataToDNG, args=(filepath,))
