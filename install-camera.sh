@@ -11,6 +11,7 @@ echo ''
 echo -e '\033[93mInstalling prerequisites... \033[0m'
 sudo apt install -y git python3 python3-pip python3-picamera libatlas-base-dev
 sudo pip3 install RPi.GPIO adafruit-circuitpython-neopixel PiDNG --force
+sudo pip3 uninstall -y numpy && sudo pip3 install numpy==1.21.4
 
 
 echo ''
