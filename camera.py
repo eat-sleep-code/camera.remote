@@ -47,7 +47,6 @@ args = parser.parse_args()
 
 
 running = False
-buttons = TrackballController()
 
 previewVisible = False
 previewWidth = 800
