@@ -1,13 +1,13 @@
-import io
-import logging
-import socketserver
-import subprocess
-from light import Light
-from picamera import PiCamera
+from functions import Echo, Console
+from controls import Light
 from threading import Condition
 from http import server
+import globals
+import io
+import socketserver
+import subprocess
 
-global buttonDictionary
+
 
 PAGE="""\
 <!DOCTYPE html>
@@ -406,8 +406,6 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 
 	def do_GET(self):
 		global output
-		global statusDictionary
-		global buttonDictionary
 		if self.path == '/':
 			contentEncoded = PAGE.encode('utf-8')
 			self.send_response(200)
@@ -436,7 +434,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			except Exception as ex:
 				pass
 		elif self.path == '/status':
-			content = statusDictionary['message']
+			content = globals.statusDictionary['message']
 			if len(content) == 0:
 				content = "Ready"
 			contentEncoded = content.encode('utf-8')
@@ -447,102 +445,102 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			self.wfile.write(contentEncoded)
 		elif self.path.startswith('/control/'):
 			if self.path == '/control/capture/photo':	
-				buttonDictionary.update({'capture': True})
+				globals.buttonDictionary.update({'capture': True})
 
 			elif self.path == '/control/capture/video':	
-				buttonDictionary.update({'captureVideo': True})
+				globals.buttonDictionary.update({'captureVideo': True})
 
 			elif self.path == '/control/shutter/up':	
-				buttonDictionary.update({'shutterUp': True})
+				globals.buttonDictionary.update({'shutterUp': True})
 
 			elif self.path == '/control/shutter/down':	
-				buttonDictionary.update({'shutterDown': True})
+				globals.buttonDictionary.update({'shutterDown': True})
 
 			elif self.path == '/control/iso/up':	
-				buttonDictionary.update({'isoUp': True})
+				globals.buttonDictionary.update({'isoUp': True})
 
 			elif self.path == '/control/iso/down':	
-				buttonDictionary.update({'isoDown': True})
+				globals.buttonDictionary.update({'isoDown': True})
 
 			elif self.path == '/control/ev/up':	
-				buttonDictionary.update({'evUp': True})
+				globals.buttonDictionary.update({'evUp': True})
 
 			elif self.path == '/control/ev/down':	
-				buttonDictionary.update({'evDown': True})
+				globals.buttonDictionary.update({'evDown': True})
 
 			elif self.path == '/control/bracket/up':	
-				buttonDictionary.update({'bracketUp': True})
+				globals.buttonDictionary.update({'bracketUp': True})
 
 			elif self.path == '/control/bracket/down':	
-				buttonDictionary.update({'bracketDown': True})
+				globals.buttonDictionary.update({'bracketDown': True})
 
 			elif self.path == '/control/exit':	
-				buttonDictionary.update({'exit': True})
+				globals.buttonDictionary.update({'exit': True})
 
 			elif self.path == '/control/trackball':	
-				buttonDictionary.update({'trackball': True})
+				globals.buttonDictionary.update({'trackball': True})
 
 			elif self.path == '/control/light/all/on':	
-				buttonDictionary.update({'lightW': 255})
-				buttonDictionary.update({'lightR': 255})
-				buttonDictionary.update({'lightG': 255})
-				buttonDictionary.update({'lightB': 255})
+				globals.buttonDictionary.update({'lightW': 255})
+				globals.buttonDictionary.update({'lightR': 255})
+				globals.buttonDictionary.update({'lightG': 255})
+				globals.buttonDictionary.update({'lightB': 255})
 
 			elif self.path == '/control/light/all/off':	
-				buttonDictionary.update({'lightW': 0})
-				buttonDictionary.update({'lightR': 0})
-				buttonDictionary.update({'lightG': 0})
-				buttonDictionary.update({'lightB': 0})
+				globals.buttonDictionary.update({'lightW': 0})
+				globals.buttonDictionary.update({'lightR': 0})
+				globals.buttonDictionary.update({'lightG': 0})
+				globals.buttonDictionary.update({'lightB': 0})
 
 			elif self.path == '/control/light/white/up':	
-				if buttonDictionary['lightW'] < 255:
-					buttonDictionary.update({'lightW': buttonDictionary['lightW'] + 1})
+				if globals.buttonDictionary['lightW'] < 255:
+					globals.buttonDictionary.update({'lightW': globals.buttonDictionary['lightW'] + 1})
 				else: 
-					buttonDictionary.update({'lightW': 0})
+					globals.buttonDictionary.update({'lightW': 0})
 
 			elif self.path == '/control/light/white/down':	
-				if buttonDictionary['lightW'] > 0:
-					buttonDictionary.update({'lightW': buttonDictionary['lightW'] - 1})
+				if globals.buttonDictionary['lightW'] > 0:
+					globals.buttonDictionary.update({'lightW': globals.buttonDictionary['lightW'] - 1})
 				else: 
-					buttonDictionary.update({'lightW': 255})
+					globals.buttonDictionary.update({'lightW': 255})
 
 			elif self.path == '/control/light/red/up':	
-				if buttonDictionary['lightR'] < 255:
-					buttonDictionary.update({'lightR': buttonDictionary['lightR'] + 1})
+				if globals.buttonDictionary['lightR'] < 255:
+					globals.buttonDictionary.update({'lightR': globals.buttonDictionary['lightR'] + 1})
 				else: 
-					buttonDictionary.update({'lightR': 0})
+					globals.buttonDictionary.update({'lightR': 0})
 
 			elif self.path == '/control/light/red/down':	
-				if buttonDictionary['lightR'] > 0:
-					buttonDictionary.update({'lightR': buttonDictionary['lightR'] - 1})
+				if globals.buttonDictionary['lightR'] > 0:
+					globals.buttonDictionary.update({'lightR': globals.buttonDictionary['lightR'] - 1})
 				else: 
-					buttonDictionary.update({'lightR': 255})
+					globals.buttonDictionary.update({'lightR': 255})
 
 			elif self.path == '/control/light/green/up':	
-				if buttonDictionary['lightG'] < 255:
-					buttonDictionary.update({'lightG': buttonDictionary['lightG'] + 1})
+				if globals.buttonDictionary['lightG'] < 255:
+					globals.buttonDictionary.update({'lightG': globals.buttonDictionary['lightG'] + 1})
 				else: 
-					buttonDictionary.update({'lightG': 0})
+					globals.buttonDictionary.update({'lightG': 0})
 
 			elif self.path == '/control/light/green/down':	
-				if buttonDictionary['lightG'] > 0:
-					buttonDictionary.update({'lightG': buttonDictionary['lightG'] - 1})
+				if globals.buttonDictionary['lightG'] > 0:
+					globals.buttonDictionary.update({'lightG': globals.buttonDictionary['lightG'] - 1})
 				else: 
-					buttonDictionary.update({'lightG': 255})
+					globals.buttonDictionary.update({'lightG': 255})
 
 			elif self.path == '/control/light/blue/up':	
-				if buttonDictionary['lightB'] < 255:
-					buttonDictionary.update({'lightB': buttonDictionary['lightB'] + 1})
+				if globals.buttonDictionary['lightB'] < 255:
+					globals.buttonDictionary.update({'lightB': globals.buttonDictionary['lightB'] + 1})
 				else: 
-					buttonDictionary.update({'lightB': 0})
+					globals.buttonDictionary.update({'lightB': 0})
 
 			elif self.path == '/control/light/blue/down':	
-				if buttonDictionary['lightB'] > 0:
-					buttonDictionary.update({'lightB': buttonDictionary['lightB'] - 1})
+				if globals.buttonDictionary['lightB'] > 0:
+					globals.buttonDictionary.update({'lightB': globals.buttonDictionary['lightB'] - 1})
 				else: 
-					buttonDictionary.update({'lightB': 255})
+					globals.buttonDictionary.update({'lightB': 255})
 
-			Light.updateLight(buttonDictionary)
+			Light.updateLight(globals.buttonDictionary)
 			self.send_response(200)
 			self.send_header('Content-Type', 'text/html')
 			self.send_header('Content-Length', 0)
@@ -562,14 +560,8 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera, running, parentStatusDictionary, parentButtonDictionary):
+def startStream(camera, running):
 	global output
-	global statusDictionary 
-	global buttonDictionary
-	statusDictionary = parentStatusDictionary
-	buttonDictionary = parentButtonDictionary
-	camera.resolution = (1920, 1080)
-	camera.framerate = 30
 
 	output = StreamingOutput()
 	camera.start_recording(output, format='mjpeg')
@@ -587,14 +579,8 @@ def startStream(camera, running, parentStatusDictionary, parentButtonDictionary)
 		print('\n Stream ended \n')
 
 
-def resumeStream(camera, running, parentStatusDictionary, parentButtonDictionary):
+def resumeStream(camera, running):
 	global output
-	global statusDictionary 
-	global buttonDictionary
-	statusDictionary = parentStatusDictionary
-	buttonDictionary = parentButtonDictionary
-	camera.resolution = (1920, 1080)
-	camera.framerate = 30
 	output = StreamingOutput()
 	camera.start_recording(output, format='mjpeg')
 	print(" Resuming preview... ")

@@ -1,14 +1,9 @@
-# Compatibility Notice
-
-Due to breaking changes in the Raspberry Pi OS camera stack, if you wish to use this software on a Raspberry Pi running "Bullseye" (or newer) version of Raspberry Pi OS, you must enable Legacy Camera Support via `sudo raspi-config` > *Interface Options* > *Legacy Camera*.
-
----
-
 # Camera Remote
 
 Combining this program with a Raspberry Pi HQ camera, a Raspberry Pi Zero WH, and an Adafruit 16-LED NeoPixel ring will result in a camera that can be controlled via a web page.
 
-:information_source: &nbsp; *The primary intended use of this application is for still photography and photogammetry.  Preview is suspended during video capture due to apparent hardware limitations.   This system can be used to capture video, but it currently is not user-friendly.*
+> [!NOTE]
+> The primary intended use of this application is for still photography and photogammetry.  Preview mayb be suspended during video capture due to apparent hardware limitations.   This system can be used to capture video, but it currently is not user-friendly.*
 
 ---
 ## Use With Other Camera Software
@@ -19,11 +14,9 @@ Combining this program with a Raspberry Pi HQ camera, a Raspberry Pi Zero WH, an
 
 ---
 ## Getting Started
-
+- Use [Raspberry Pi Imager](https://www.raspberrypi.com/software) to install Raspberry Pi OS Lite *(Bookworm)* on a microSD card
 - Use [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) to:
-  - Set the Memory Split value to a value of at least 192MB
   - Enable the CSI camera interface
-  - Enable Legacy Camera Support (if applicable)
   - Set up your WiFi connection
 - Connect the Raspberry Pi HQ Camera to your Raspberry Pi
 
@@ -41,8 +34,25 @@ sudo chmod +x ~/install-camera.sh && ~/install-camera.sh
 
 ## Usage
 ```
-camera.remote
+camera.zero <options>
 ```
+
+### Options
+
++ _--rotate_ : Rotate the camera in 90&deg; increments     *(default: 0)*
++ _--exifFStop_ : Set the numeric F-Stop value in the image EXIF data *(default: Not specified)*
++ _--exifFocalLength_ : Set the numeric Focal Length value (mm) in the image EXIF data *(default: Not specified)*
++ _--exifFocalLengthEquivalent_ : Set the numeric 35mm Focal Length value (mm) in the image EXIF data *(default: Not specified)*
+
+
+### Example
+```bash
+camera.zero --rotate 180 --exifFStop 2.2 --exifFocalLength 2.75 --exifFocalLengthEquivalent 16
+```
+
+> [!TIP]
+> The EXIF data shown above is completely optional but may prove useful when using captured images with third-party applications such as photogrammetry software.
+
 
 ### Web Controls
 
@@ -52,7 +62,7 @@ The following attributes can be adjusted from the web interface:
 
 1) Capture
      - Still Photo
-     - Video*
+     - Video[^1]
 1) Shutter Speed
 1) ISO
 1) Exposure Compensation
@@ -67,18 +77,27 @@ The following attributes can be adjusted from the web interface:
 
 ---
 
-## Infrared Cameras
-If you are using an infrared (IR) camera, you will need to modify the Auto White Balance (AWB) mode at boot time.
-
-This can be achieved by executing `sudo nano /boot/config.txt` and adding the following lines.
-
+## Usage
 ```
-# Camera Settings 
-awb_auto_is_greyworld=1
+camera.zero <options>
 ```
 
-Also note, that while IR cameras utilize "invisible" (outside the spectrum of the human eye) light, they can not magically see in the dark.   You will need to illuminate night scenes with one or more [IR emitting LEDs](https://www.adafruit.com/product/387) to take advantage of an Infrared Camera.
+### Options
+
++ _--rotate_ : Rotate the camera in 90&deg; increments     *(default: 0)*
++ _--exifFStop_ : Set the numeric F-Stop value in the image EXIF data *(default: Not specified)*
++ _--exifFocalLength_ : Set the numeric Focal Length value (mm) in the image EXIF data *(default: Not specified)*
++ _--exifFocalLengthEquivalent_ : Set the numeric 35mm Focal Length value (mm) in the image EXIF data *(default: Not specified)*
+
+
+### Example
+```bash
+camera.zero --rotate 180 --exifFStop 2.2 --exifFocalLength 2.75 --exifFocalLengthEquivalent 16
+```
+
+> [!TIP]
+> The EXIF data shown above is completely optional but may prove useful when using captured images with third-party applications such as photogrammetry software.
 
 ---
 
-:information_source:  &nbsp; *This application was developed using a Raspberry Pi HQ (2020) camera and Raspberry Pi Zero WH and Raspberry Pi 4B boards.   Issues may arise if you are using either third party or older hardware.*
+[^1]: Due to licensing restrictions, video is captured with an **.h264** format.   To convert the **.h264** file into the more common **.mp4** format, you can execute the following command: `ffmpeg -framerate 30 -i input.264 -c copy output.mp4`
