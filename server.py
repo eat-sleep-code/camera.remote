@@ -560,11 +560,12 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera, running):
+def startStream(camera, encoder, running):
 	global output
 
+	
 	output = StreamingOutput()
-	camera.start_recording(output, format='mjpeg')
+	camera.start_recording(encoder, output)
 	hostname = subprocess.getoutput('hostname -I')
 	url = 'http://' + str(hostname)
 	print('\n Remote Interface: ' + url + '\n')
@@ -579,10 +580,10 @@ def startStream(camera, running):
 		print('\n Stream ended \n')
 
 
-def resumeStream(camera, running):
+def resumeStream(camera, encoder, running):
 	global output
 	output = StreamingOutput()
-	camera.start_recording(output, format='mjpeg')
+	camera.start_recording(encoder, output)
 	print(" Resuming preview... ")
 
 

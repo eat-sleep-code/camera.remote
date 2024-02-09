@@ -3,7 +3,7 @@ from libcamera import ColorSpace, controls, Transform
 from picamera2 import MappedArray, Picamera2, Preview
 from picamera2.controls import Controls
 from picamera2.outputs import FileOutput
-from picamera2.encoders import H264Encoder, Quality
+from picamera2.encoders import H264Encoder, MJPEGEncoder, Quality
 from controls import Light
 from PIL import Image
 import argparse
@@ -375,14 +375,14 @@ def convertBayerDataToDNG(filePath):
 # ------------------------------------------------------------------------------
 def createControls():
 	global running
-
+	encoder = MJPEGEncoder()
 	running = True
-	server.startStream(camera, running)
+	server.startStream(camera, encoder, running)
 	
 # -------------------------------------------------------------------------------
 def darkMode():
 	Light.off()
-	TrackballController.off()
+
 
 
 # === Image Capture ============================================================
@@ -492,6 +492,10 @@ try:
 
 				# Video
 				if isRecording == False:
+					if (camera.recording == True):
+						previewEncoder = MJPEGEncoder()
+						server.pauseStream(camera, previewEncoder) # Prevent simultaneous attempts to record
+						
 					camera.stop()
 					isRecording = True
 					globals.statusDictionary.update({'action': 'recording'})
@@ -512,6 +516,10 @@ try:
 					globals.statusDictionary.update({'message': ' Recording: Stopped '})
 					globals.buttonDictionary.update({'captureVideo': False})
 					camera.start()
+					if (camera.recording == False):
+						previewEncoder = MJPEGEncoder()
+						server.resumeStream(camera, previewEncoder, running)
+						
 					
 				time.sleep(1)
 
