@@ -402,6 +402,7 @@ class StreamingOutput(io.BufferedIOBase):
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
 	def do_GET(self):
+		global output
 		if self.path == '/':
 			contentEncoded = PAGE.encode('utf-8')
 			self.send_response(200)
@@ -553,13 +554,16 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			self.end_headers()
 
 
+
+output = StreamingOutput()
+
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	allow_reuse_address = True
 	daemon_threads = True
 
 
 def startStream(camera, running):
-	output = StreamingOutput()
+	global output
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
 	url = 'http://' + str(hostname)
@@ -576,7 +580,6 @@ def startStream(camera, running):
 
 def resumeStream(camera, running):
 	global output
-	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	print(" Resuming preview... ")
 
