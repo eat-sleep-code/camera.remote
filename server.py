@@ -560,7 +560,6 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 def startStream(camera, running):
 	output = StreamingOutput()
-	camera.start()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
 	url = 'http://' + str(hostname)
@@ -572,14 +571,12 @@ def startStream(camera, running):
 		server.serve_forever()
 	finally:
 		camera.stop_recording()
-		camera.stop()
 		print('\n Stream ended \n')
 
 
 def resumeStream(camera, running):
 	global output
 	output = StreamingOutput()
-	camera.start()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	print(" Resuming preview... ")
 
@@ -587,7 +584,6 @@ def resumeStream(camera, running):
 def pauseStream(camera):
 	try:
 		camera.stop_recording()
-		camera.stop()
 		print(" Pausing preview... ")
 	except Exception as ex:
 		print(str(ex))
