@@ -386,28 +386,19 @@ PAGE="""\
 </html>
 """
 
-class StreamingOutput(object):
+class StreamingOutput(io.BufferedIOBase):
 	def __init__(self):
 		self.frame = None
-		self.buffer = io.BytesIO()
 		self.condition = Condition()
 
 	def write(self, streamBuffer):
-		if streamBuffer.startswith(b'\xff\xd8'):
-			self.buffer.truncate()
-			with self.condition:
-				self.frame = self.buffer.getvalue()
-				self.condition.notify_all()
-			self.buffer.seek(0)
-		return self.buffer.write(streamBuffer)
+		with self.condition:
+			self.frame = streamBuffer
+			self.condition.notify_all()
 
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
-	def log_message(self, format, *args):
-		pass
-
 	def do_GET(self):
-		global output
 		if self.path == '/':
 			contentEncoded = PAGE.encode('utf-8')
 			self.send_response(200)
@@ -563,7 +554,6 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 
 def startStream(camera, running):
-	global output
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
@@ -572,7 +562,6 @@ def startStream(camera, running):
 	try:
 		address = ('', 80)
 		server = StreamingServer(address, StreamingHandler)
-		server.allow_reuse_address = True
 		server.logging = False
 		server.serve_forever()
 	finally:
