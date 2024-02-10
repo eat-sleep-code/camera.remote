@@ -401,9 +401,15 @@ try:
 		camera.start(show_preview=False)
 		time.sleep(1.0)
 	except:
-		console.warn('Could not start camera.   Is it already in use? ', '\n ')
+		try:
+			camera.stop()
+			time.sleep(1.0)
+			camera.start(show_preview=False)
+		except: 
+			console.warn('Could not start camera.   Is it already in use? ', '\n ')
+			pass
 		pass
-	
+
 
 	setShutter(shutter, 0)		
 	setISO(iso, 0)
