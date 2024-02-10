@@ -533,7 +533,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 				else: 
 					globals.buttonDictionary.update({'lightB': 255})
 
-			Light.updateLight(globals.buttonDictionary)
+			Light.updateLight()
 			self.send_response(200)
 			self.send_header('Content-Type', 'text/html')
 			self.send_header('Content-Length', 0)
