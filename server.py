@@ -555,8 +555,6 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 
 
 
-output = StreamingOutput()
-
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	allow_reuse_address = True
 	daemon_threads = True
@@ -564,6 +562,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 def startStream(camera, running):
 	global output
+	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
 	url = 'http://' + str(hostname)
@@ -580,6 +579,7 @@ def startStream(camera, running):
 
 def resumeStream(camera, running):
 	global output
+	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	print(" Resuming preview... ")
 

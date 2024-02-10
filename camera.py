@@ -1,8 +1,7 @@
 from functions import Echo, Console
 from libcamera import ColorSpace, controls, Transform
-from picamera2 import MappedArray, Picamera2, Preview
+from picamera2 import Picamera2
 from picamera2.controls import Controls
-from picamera2.outputs import FileOutput
 from picamera2.encoders import H264Encoder, Quality
 from controls import Light
 from PIL import Image
@@ -18,7 +17,7 @@ import sys
 import threading
 import time
 
-version = '2024.02.09'
+version = '2024.02.10'
 
 
 console = Console()
@@ -373,7 +372,7 @@ def convertBayerDataToDNG(filePath):
 		pass
 
 # ------------------------------------------------------------------------------
-def createControls():
+def startPreviewStream():
 	global running
 	running = True
 	server.startStream(camera, running)
@@ -386,9 +385,9 @@ def darkMode():
 
 # === Image Capture ============================================================
 
-controlsThread = threading.Thread(target=createControls)
-controlsThread.daemon = True
-controlsThread.start()
+previewStreamThread = threading.Thread(target=startPreviewStream)
+previewStreamThread.daemon = True
+previewStreamThread.start()
 
 
 try:
@@ -492,10 +491,8 @@ try:
 				# Video
 				if isRecording == False:
 					if (camera.recording == True):
-						
 						server.pauseStream(camera) # Prevent simultaneous attempts to record
 						
-					camera.stop()
 					isRecording = True
 					globals.statusDictionary.update({'action': 'recording'})
 					filePath = getfilePath(True, True)
@@ -514,7 +511,6 @@ try:
 					console.info('Capture complete \n')
 					globals.statusDictionary.update({'message': ' Recording: Stopped '})
 					globals.buttonDictionary.update({'captureVideo': False})
-					camera.start()
 					if (camera.recording == False):
 						server.resumeStream(camera, running)
 						
