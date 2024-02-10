@@ -540,7 +540,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 				else: 
 					globals.buttonDictionary.update({'lightB': 255})
 
-			Light.updateLight(globals.buttonDictionary)
+			Light.updateLight()
 			self.send_response(200)
 			self.send_header('Content-Type', 'text/html')
 			self.send_header('Content-Length', 0)
@@ -560,11 +560,10 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera, running):
+def startStream(camera, encoder, running):
 	global output
+	camera.start_recording(encoder, 'stream.mjpeg')
 	
-	#output = StreamingOutput()
-	#camera.start_recording(encoder, output)
 	hostname = subprocess.getoutput('hostname -I')
 	url = 'http://' + str(hostname)
 	print('\n Remote Interface: ' + url + '\n')
@@ -575,14 +574,13 @@ def startStream(camera, running):
 		server.logging = False
 		server.serve_forever()
 	finally:
-	#	camera.stop_recording()
+		camera.stop_recording()
 		print('\n Stream ended \n')
 
 
 def resumeStream(camera, running):
 	global output
-	#output = StreamingOutput()
-	#camera.start_recording(encoder, output)
+	output = StreamingOutput()
 	print(" Resuming preview... ")
 
 
