@@ -375,9 +375,8 @@ def convertBayerDataToDNG(filePath):
 # ------------------------------------------------------------------------------
 def createControls():
 	global running
-	encoder = MJPEGEncoder()
 	running = True
-	server.startStream(camera, encoder, running)
+	server.startStream(camera, running)
 	
 # -------------------------------------------------------------------------------
 def darkMode():
@@ -494,7 +493,7 @@ try:
 				if isRecording == False:
 					if (camera.recording == True):
 						previewEncoder = MJPEGEncoder()
-						server.pauseStream(camera, previewEncoder) # Prevent simultaneous attempts to record
+						server.pauseStream(camera) # Prevent simultaneous attempts to record
 						
 					camera.stop()
 					isRecording = True
@@ -518,7 +517,7 @@ try:
 					camera.start()
 					if (camera.recording == False):
 						previewEncoder = MJPEGEncoder()
-						server.resumeStream(camera, previewEncoder, running)
+						server.resumeStream(camera, running)
 						
 					
 				time.sleep(1)

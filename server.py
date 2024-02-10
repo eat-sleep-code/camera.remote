@@ -422,14 +422,14 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			self.end_headers()
 			try:
 				while True:
-					with output.condition:
-						output.condition.wait()
-						frame = output.frame
+					#with output.condition:
+					#	output.condition.wait()
+					#	frame = output.frame
 					self.wfile.write(b'--FRAME\r\n')
 					self.send_header('Content-Type', 'image/jpeg')
-					self.send_header('Content-Length', len(frame))
+					#self.send_header('Content-Length', len(frame))
 					self.end_headers()
-					self.wfile.write(frame)
+					self.wfile.write( )
 					self.wfile.write(b'\r\n')
 			except Exception as ex:
 				pass
@@ -560,12 +560,11 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera, encoder, running):
+def startStream(camera, running):
 	global output
-
 	
-	output = StreamingOutput()
-	camera.start_recording(encoder, output)
+	#output = StreamingOutput()
+	#camera.start_recording(encoder, output)
 	hostname = subprocess.getoutput('hostname -I')
 	url = 'http://' + str(hostname)
 	print('\n Remote Interface: ' + url + '\n')
@@ -576,20 +575,20 @@ def startStream(camera, encoder, running):
 		server.logging = False
 		server.serve_forever()
 	finally:
-		camera.stop_recording()
+	#	camera.stop_recording()
 		print('\n Stream ended \n')
 
 
-def resumeStream(camera, encoder, running):
+def resumeStream(camera, running):
 	global output
-	output = StreamingOutput()
-	camera.start_recording(encoder, output)
+	#output = StreamingOutput()
+	#camera.start_recording(encoder, output)
 	print(" Resuming preview... ")
 
 
 def pauseStream(camera):
 	try:
-		camera.stop_recording()
+		#camera.stop_recording()
 		print(" Pausing preview... ")
 	except Exception as ex:
 		print(str(ex))
