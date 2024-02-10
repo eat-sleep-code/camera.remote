@@ -10,6 +10,9 @@ import socketserver
 import subprocess
 
 
+console = Console()
+echo = Echo()
+
 
 PAGE="""\
 <!DOCTYPE html>
@@ -407,6 +410,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			self.end_headers()
 			self.wfile.write(contentEncoded)
 		elif self.path == '/stream.mjpg' or self.path == '/blank.jpg':
+			console.info('Requesting stream...')
 			self.send_response(200)
 			self.send_header('Age', 0)
 			self.send_header('Cache-Control', 'no-cache, private')
@@ -425,6 +429,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 					self.wfile.write( )
 					self.wfile.write(b'\r\n')
 			except Exception as ex:
+				console.warn('Request failed: ' + str(ex))
 				pass
 		elif self.path == '/status':
 			content = globals.statusDictionary['message']
@@ -555,6 +560,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 def startStream(camera, running):
 	output = StreamingOutput()
+	camera.start()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
 	url = 'http://' + str(hostname)
@@ -566,12 +572,14 @@ def startStream(camera, running):
 		server.serve_forever()
 	finally:
 		camera.stop_recording()
+		camera.stop()
 		print('\n Stream ended \n')
 
 
 def resumeStream(camera, running):
 	global output
 	output = StreamingOutput()
+	camera.start()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	print(" Resuming preview... ")
 
@@ -579,6 +587,7 @@ def resumeStream(camera, running):
 def pauseStream(camera):
 	try:
 		camera.stop_recording()
+		camera.stop()
 		print(" Pausing preview... ")
 	except Exception as ex:
 		print(str(ex))
