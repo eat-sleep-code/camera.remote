@@ -3,7 +3,7 @@ from libcamera import ColorSpace, controls, Transform
 from picamera2 import MappedArray, Picamera2, Preview
 from picamera2.controls import Controls
 from picamera2.outputs import FileOutput
-from picamera2.encoders import H264Encoder, JpegEncoder, MJPEGEncoder, Quality
+from picamera2.encoders import H264Encoder, Quality
 from controls import Light
 from PIL import Image
 import argparse
@@ -29,7 +29,6 @@ camera.set_logging(Picamera2.ERROR)
 controls = Controls(camera)
 stillConfiguration = camera.create_still_configuration(main={"size": camera.sensor_resolution}, colour_space = ColorSpace.Sycc())
 videoConfiguration = camera.create_video_configuration(main={"size": (1920, 1080)}, colour_space = ColorSpace.Rec709())
-previewEncoder = JpegEncoder()
 try:
 	camera.set_controls({"AfMode": controls.AfModeEnum.Continuous})
 except Exception as ex:
@@ -377,7 +376,7 @@ def convertBayerDataToDNG(filePath):
 def createControls():
 	global running
 	running = True
-	server.startStream(camera, encoder, running)
+	server.startStream(camera, running)
 	
 # -------------------------------------------------------------------------------
 def darkMode():

@@ -1,6 +1,8 @@
 from functions import Echo, Console
 from controls import Light
 from threading import Condition
+from picamera2.encoders import JpegEncoder
+from picamera2.outputs import FileOutput
 from http import server
 import globals
 import io
@@ -422,12 +424,12 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 			self.end_headers()
 			try:
 				while True:
-					#with output.condition:
-					#	output.condition.wait()
-					#	frame = output.frame
+					with output.condition:
+						output.condition.wait()
+						frame = output.frame
 					self.wfile.write(b'--FRAME\r\n')
 					self.send_header('Content-Type', 'image/jpeg')
-					#self.send_header('Content-Length', len(frame))
+					self.send_header('Content-Length', len(frame))
 					self.end_headers()
 					self.wfile.write( )
 					self.wfile.write(b'\r\n')
@@ -540,7 +542,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 				else: 
 					globals.buttonDictionary.update({'lightB': 255})
 
-			Light.updateLight()
+			Light.updateLight(globals.buttonDictionary)
 			self.send_response(200)
 			self.send_header('Content-Type', 'text/html')
 			self.send_header('Content-Length', 0)
@@ -560,10 +562,10 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera, encoder, running):
+def startStream(camera, running):
 	global output
-	camera.start_recording(encoder, 'stream.mjpeg')
-	
+	output = StreamingOutput()
+	camera.start_recording(JpegEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
 	url = 'http://' + str(hostname)
 	print('\n Remote Interface: ' + url + '\n')
@@ -581,12 +583,13 @@ def startStream(camera, encoder, running):
 def resumeStream(camera, running):
 	global output
 	output = StreamingOutput()
+	camera.start_recording(JpegEncoder(), FileOutput(output))
 	print(" Resuming preview... ")
 
 
 def pauseStream(camera):
 	try:
-		#camera.stop_recording()
+		camera.stop_recording()
 		print(" Pausing preview... ")
 	except Exception as ex:
 		print(str(ex))
