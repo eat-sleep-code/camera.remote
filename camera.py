@@ -28,6 +28,7 @@ camera.set_logging(Picamera2.ERROR)
 controls = Controls(camera)
 stillConfiguration = camera.create_still_configuration(main={"size": camera.sensor_resolution}, colour_space = ColorSpace.Sycc())
 videoConfiguration = camera.create_video_configuration(main={"size": (1920, 1080)}, colour_space = ColorSpace.Rec709())
+
 try:
 	camera.set_controls({"AfMode": controls.AfModeEnum.Continuous})
 except Exception as ex:

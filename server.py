@@ -562,6 +562,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 def startStream(camera, running):
 	global output
+	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}))
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
@@ -579,6 +580,7 @@ def startStream(camera, running):
 
 def resumeStream(camera, running):
 	global output
+	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}))
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	print(" Resuming preview... ")
