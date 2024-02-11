@@ -9,6 +9,7 @@ import globals
 import io
 import socketserver
 import subprocess
+import time
 
 
 console = Console()
@@ -563,6 +564,8 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 def startStream(camera, running):
 	global output
+	camera.stop_recording()
+	time.sleep(1)
 	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}, colour_space = ColorSpace.Sycc()))
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
@@ -581,6 +584,8 @@ def startStream(camera, running):
 
 def resumeStream(camera, running):
 	global output
+	camera.stop_recording()
+	time.sleep(1)
 	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}, colour_space = ColorSpace.Sycc()))
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
@@ -590,6 +595,7 @@ def resumeStream(camera, running):
 def pauseStream(camera):
 	try:
 		camera.stop_recording()
+		time.sleep(1)
 		print(" Pausing preview... ")
 	except Exception as ex:
 		print(str(ex))
