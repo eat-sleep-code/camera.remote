@@ -564,8 +564,14 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 def startStream(camera, running):
 	global output
-	camera.stop_recording()
-	time.sleep(1)
+	try:
+		camera.stop_recording()
+		camera.stop()
+		time.sleep(1)
+	except Exception as ex:
+		console.info('Request to stop camera failed.' + str(ex))
+		pass
+	
 	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}, colour_space = ColorSpace.Sycc()))
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
@@ -584,8 +590,13 @@ def startStream(camera, running):
 
 def resumeStream(camera, running):
 	global output
-	camera.stop_recording()
-	time.sleep(1)
+	try:
+		camera.stop_recording()
+		camera.stop()
+		time.sleep(1)
+	except Exception as ex:
+		console.info('Request to stop camera failed.' + str(ex))
+		pass
 	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}, colour_space = ColorSpace.Sycc()))
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
