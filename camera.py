@@ -409,6 +409,7 @@ try:
 			camera.stop()
 			time.sleep(1.0)
 			camera.start(show_preview=False)
+			time.sleep(1.0)
 		except: 
 			console.warn('Could not start camera.   Is it already in use? ', '\n ')
 			pass

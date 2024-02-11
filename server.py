@@ -2,7 +2,7 @@ from functions import Echo, Console
 from controls import Light
 from threading import Condition
 from libcamera import ColorSpace
-from picamera2.encoders import JpegEncoder
+from picamera2.encoders import MJPEGEncoder
 from picamera2.outputs import FileOutput
 from http import server
 import globals
@@ -566,7 +566,7 @@ def startStream(camera, previewConfiguration, running):
 	global output
 	camera.configure(previewConfiguration)
 	output = StreamingOutput()
-	camera.start_recording(JpegEncoder(), FileOutput(output))
+	camera.start_recording(MJPEGEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
 	url = 'http://' + str(hostname)
 	print('\n Remote Interface: ' + url + '\n')
