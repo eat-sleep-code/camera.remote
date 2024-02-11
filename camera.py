@@ -497,9 +497,11 @@ try:
 
 				# Video
 				if isRecording == False:
-					if (camera.recording == True):
+					try:
 						server.pauseStream(camera) # Prevent simultaneous attempts to record
-						
+					except:
+						pass
+
 					isRecording = True
 					globals.statusDictionary.update({'action': 'recording'})
 					filePath = getfilePath(True, True)
@@ -518,9 +520,10 @@ try:
 					console.info('Capture complete \n')
 					globals.statusDictionary.update({'message': ' Recording: Stopped '})
 					globals.buttonDictionary.update({'captureVideo': False})
-					if (camera.recording == False):
+					try:
 						server.resumeStream(camera, running)
-						
+					except:
+						pass
 					
 				time.sleep(1)
 

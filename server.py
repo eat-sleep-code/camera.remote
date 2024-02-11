@@ -1,6 +1,7 @@
 from functions import Echo, Console
 from controls import Light
 from threading import Condition
+from libcamera import ColorSpace
 from picamera2.encoders import JpegEncoder
 from picamera2.outputs import FileOutput
 from http import server
@@ -562,7 +563,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 def startStream(camera, running):
 	global output
-	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}))
+	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}, colour_space = ColorSpace.Sycc()))
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
@@ -580,7 +581,7 @@ def startStream(camera, running):
 
 def resumeStream(camera, running):
 	global output
-	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}))
+	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}, colour_space = ColorSpace.Sycc()))
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	print(" Resuming preview... ")
