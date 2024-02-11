@@ -562,17 +562,9 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 	daemon_threads = True
 
 
-def startStream(camera, running):
+def startStream(camera, previewConfiguration, running):
 	global output
-	try:
-		camera.stop_recording()
-		camera.stop()
-		time.sleep(1)
-	except Exception as ex:
-		console.info('Request to stop camera failed.' + str(ex))
-		pass
-	
-	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}, colour_space = ColorSpace.Sycc()))
+	camera.configure(previewConfiguration)
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	hostname = subprocess.getoutput('hostname -I')
@@ -588,16 +580,9 @@ def startStream(camera, running):
 		print('\n Stream ended \n')
 
 
-def resumeStream(camera, running):
+def resumeStream(camera, previewConfiguration, running):
 	global output
-	try:
-		camera.stop_recording()
-		camera.stop()
-		time.sleep(1)
-	except Exception as ex:
-		console.info('Request to stop camera failed.' + str(ex))
-		pass
-	camera.configure(camera.create_video_configuration(main={"size": (960, 540)}, colour_space = ColorSpace.Sycc()))
+	camera.configure(previewConfiguration)
 	output = StreamingOutput()
 	camera.start_recording(JpegEncoder(), FileOutput(output))
 	print(" Resuming preview... ")

@@ -26,8 +26,10 @@ globals.initialize()
 camera = Picamera2()
 camera.set_logging(Picamera2.ERROR)
 controls = Controls(camera)
+previewConfiguration = camera.create_video_configuration(main={"size": (960, 540)}, colour_space = ColorSpace.Sycc())
 stillConfiguration = camera.create_still_configuration(main={"size": camera.sensor_resolution}, colour_space = ColorSpace.Sycc())
 videoConfiguration = camera.create_video_configuration(main={"size": (1920, 1080)}, colour_space = ColorSpace.Rec709())
+
 
 try:
 	camera.set_controls({"AfMode": controls.AfModeEnum.Continuous})
@@ -375,8 +377,9 @@ def convertBayerDataToDNG(filePath):
 # ------------------------------------------------------------------------------
 def startPreviewStream():
 	global running
+	global previewConfiguration
 	running = True
-	server.startStream(camera, running)
+	server.startStream(camera, previewConfiguration, running)
 	
 # -------------------------------------------------------------------------------
 def darkMode():
@@ -516,7 +519,7 @@ try:
 					console.info('Capture complete \n')
 					globals.statusDictionary.update({'message': ' Recording: Stopped '})
 					globals.buttonDictionary.update({'captureVideo': False})
-					server.resumeStream(camera)
+					server.resumeStream(camera, previewConfiguration, running)
 					
 				time.sleep(1)
 
