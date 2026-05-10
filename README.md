@@ -3,7 +3,7 @@
 Combining this program with a Raspberry Pi HQ camera, a Raspberry Pi Zero WH, and an Adafruit 16-LED NeoPixel ring will result in a camera that can be controlled via a web page.
 
 > [!NOTE]
-> The primary intended use of this application is for still photography and photogammetry.  Preview mayb be suspended during video capture due to apparent hardware limitations.   This system can be used to capture video, but it currently is not user-friendly.*
+> The primary intended use of this application is for still photography and photogammetry.  Preview may be suspended during video capture due to apparent hardware limitations.   This system can be used to capture video, but it currently is not user-friendly.*
 
 ---
 ## Use With Other Camera Software
